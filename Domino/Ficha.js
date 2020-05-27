@@ -1,11 +1,12 @@
  class Ficha extends THREE.Object3D {
-    constructor(valorSup, valorInf) {
+    constructor(valorSup, valorInf,mitades) {
         super();
 
+        
         var material =  new THREE.MeshNormalMaterial();
 
-        this.sup = new Mitad(valorSup,material)
-        this.inf = new Mitad(valorInf,material)
+        this.sup = new THREE.Mesh(mitades.getGeometria(valorSup),material);
+        this.inf = new THREE.Mesh(mitades.getGeometria(valorInf),material);
 
         //Realizo las modificaciones necesarias para que el centro de la ficha esté en el origen
         this.sup.position.y = 0.375;
