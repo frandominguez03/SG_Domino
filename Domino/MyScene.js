@@ -1,32 +1,17 @@
  
 /// La clase fachada del modelo
-/**
- * Usaremos una clase derivada de la clase Scene de Three.js para llevar el control de la escena y de todo lo que ocurre en ella.
- */
-
 class MyScene extends THREE.Scene {
-  // Recibe el  div  que se ha creado en el  html  que va a ser el lienzo en el que mostrar
-  // la visualización de la escena
   constructor (myCanvas) { 
     super();
     
-    // Lo primero, crear el visualizador, pasándole el lienzo sobre el que realizar los renderizados.
     this.renderer = this.createRenderer(myCanvas);
     
-    // Se crea la interfaz gráfica de usuario
     this.gui = this.createGUI ();
-    
-    // Construimos los distinos elementos que tendremos en la escena
-    
-    // Todo elemento que se desee sea tenido en cuenta en el renderizado de la escena debe pertenecer a esta. Bien como hijo de la escena (this en esta clase) o como hijo de un elemento que ya esté en la escena.
-    // Tras crear cada elemento se añadirá a la escena con   this.add(variable)
+  
     this.createLights ();
-    
-    // Tendremos una cámara con un control de movimiento con el ratón
+  
     this.createCamera ();
-    
-    
-    // Y unos ejes. Imprescindibles para orientarnos sobre dónde están las cosas
+
     this.axis = new THREE.AxesHelper (5);
     this.add (this.axis);
 
