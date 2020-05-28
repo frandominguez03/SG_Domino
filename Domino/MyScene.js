@@ -32,6 +32,16 @@ class MyScene extends THREE.Scene {
     this.add(this.ficha3);
     this.add(this.ficha4);
 
+    // Añadimos ambas sillas
+    this.silla1 = new Silla();
+    this.silla1.position.set(5, 0, 0);
+    this.silla1.rotation.y = -Math.PI/2;
+    this.silla2 = new Silla();
+    this.silla2.position.set(-5, 0, 0);
+    this.silla2.rotation.y = Math.PI/2;
+
+    this.add(this.silla1);
+    this.add(this.silla2);
 
   }
   
