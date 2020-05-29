@@ -43,6 +43,11 @@ class MyScene extends THREE.Scene {
     this.add(this.silla1);
     this.add(this.silla2);
 
+    // Añadimos la mesa
+    this.mesa = new Mesa();
+
+    this.add(this.mesa);
+
   }
   
   createCamera () {

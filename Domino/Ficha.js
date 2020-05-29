@@ -1,7 +1,6 @@
  class Ficha extends THREE.Object3D {
     constructor(valorSup, valorInf,mitades) {
         super();
-
         
         var material =  new THREE.MeshNormalMaterial();
 
