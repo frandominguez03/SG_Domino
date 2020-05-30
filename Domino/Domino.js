@@ -75,7 +75,7 @@ class Domino extends THREE.Object3D
         this.jugador_1.clearFichas();
         while(this.jugador_1.fichas.length < 7)
         {
-            this.caja = suffle(this.caja);
+            this.caja = shuffle(this.caja);
             this.jugador_1.addFicha(this.caja[this.caja.length]);
             this.caja.pop();
         }
@@ -83,7 +83,7 @@ class Domino extends THREE.Object3D
         this.jugador_2.clearFichas();
         while(this.jugador_2.fichas.length < 7)
         {
-            this.caja = suffle(this.caja);
+            this.caja = shuffle(this.caja);
             this.jugador_2.addFicha(this.caja[this.caja.length]);
             this.caja.pop();
         }
@@ -91,9 +91,9 @@ class Domino extends THREE.Object3D
 }
 
 /*
-* suffle: Función que mezcla un array
+* shuffle: Función que mezcla un array
 */
-function suffle(array)
+function shuffle(array)
 {
     var currentIndex = array.length, tmp, randomIndex;
 
