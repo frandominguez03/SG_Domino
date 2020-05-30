@@ -8,6 +8,9 @@ class Domino extends THREE.Object3D
         this.caja = [];
         this.generarFichas();
 
+        this.jugador_1 = new Jugador("Miguel");
+        this.jugador_2 = new Jugador("Francisco");
+
         var pos = 1
 
         for (var i=0; i<this.caja.length; i++)
@@ -16,6 +19,8 @@ class Domino extends THREE.Object3D
             this.add(this.caja[i]);
             pos = pos + 1;
         }
+
+        this.repartirFichas();
             
     }
 
@@ -60,4 +65,47 @@ class Domino extends THREE.Object3D
         this.caja.push(new Ficha(6,6,this.geometriasMitades));
 
     }
+
+
+    /*
+    * repartirFichas: Función que reparte aleatoriamente las fichas a los usuarios
+    */
+    repartirFichas()
+    {
+        this.jugador_1.clearFichas();
+        while(this.jugador_1.fichas.length < 7)
+        {
+            this.caja = suffle(this.caja);
+            this.jugador_1.addFicha(this.caja[this.caja.length]);
+            this.caja.pop();
+        }
+
+        this.jugador_2.clearFichas();
+        while(this.jugador_2.fichas.length < 7)
+        {
+            this.caja = suffle(this.caja);
+            this.jugador_2.addFicha(this.caja[this.caja.length]);
+            this.caja.pop();
+        }
+    }
+}
+
+/*
+* suffle: Función que mezcla un array
+*/
+function suffle(array)
+{
+    var currentIndex = array.length, tmp, randomIndex;
+
+    while(0 != currentIndex)
+    {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        
+        tmp = array[currentIndex];
+        array[currentIndex] = array[randomIndex]
+        array[randomIndex] = tmp;
+    }
+
+    return array;
 }
