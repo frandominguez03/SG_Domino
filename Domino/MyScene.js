@@ -15,22 +15,25 @@ class MyScene extends THREE.Scene {
     this.axis = new THREE.AxesHelper (5);
     this.add (this.axis);
 
-    // Array con las mitades
-    this.geometriasMitades = new Mitad();
+
+    // this.geometriasMitades = new Mitad();
     
-    this.ficha1 = new Ficha(0,1,this.geometriasMitades);
-    this.ficha2 = new Ficha(2,3,this.geometriasMitades);
-    this.ficha3 = new Ficha(4,5,this.geometriasMitades);
-    this.ficha4 = new Ficha(6,6,this.geometriasMitades);
+    // this.ficha1 = new Ficha(0,1,this.geometriasMitades);
+    // this.ficha2 = new Ficha(2,3,this.geometriasMitades);
+    // this.ficha3 = new Ficha(4,5,this.geometriasMitades);
+    // this.ficha4 = new Ficha(6,6,this.geometriasMitades);
 
-    this.ficha1.position.x = -1.5;
-    this.ficha2.position.x = -0.75;
-    this.ficha4.position.x = 0.75 
+    // this.ficha1.position.x = -1.5;
+    // this.ficha2.position.x = -0.75;
+    // this.ficha4.position.x = 0.75 
 
-    this.add(this.ficha1);
-    this.add(this.ficha2);
-    this.add(this.ficha3);
-    this.add(this.ficha4);
+    // this.add(this.ficha1);
+    // this.add(this.ficha2);
+    // this.add(this.ficha3);
+    // this.add(this.ficha4);
+
+    this.juego = new Domino();
+    this.add(this.juego);
 
     // Añadimos ambas sillas
     this.silla1 = new Silla();
