@@ -2,7 +2,7 @@
     constructor(valorSup, valorInf,mitades) {
         super();
         
-        var material =  new THREE.MeshNormalMaterial();
+        var material =  new THREE.MeshPhongMaterial({color: 0xFFFFFF});
 
         this.sup = new THREE.Mesh(mitades.getGeometria(valorSup),material);
         this.inf = new THREE.Mesh(mitades.getGeometria(valorInf),material);
