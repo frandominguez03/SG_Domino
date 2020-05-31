@@ -1,4 +1,11 @@
  class Ficha extends THREE.Object3D {
+   /**
+    * @description Constructor de la case Ficha
+    * @param {int} valorSup 
+    * @param {int} valorInf 
+    * @param {Array<Mitad>} mitades 
+    * @description En la lista mitades estań las geometrías de las mitades correspondientes a cada valor
+    */
     constructor(valorSup, valorInf,mitades) {
         super();
         

@@ -1,7 +1,6 @@
 /**
  * Modelo de la mesa central del juego
  */
-
 class Mesa extends THREE.Object3D {
     constructor() {
         super();

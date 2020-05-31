@@ -1,5 +1,8 @@
 class Domino extends THREE.Object3D
 {
+    /**
+     * @description Constructor de la clase domino
+     */
     constructor()
     {
         super();
@@ -8,25 +11,22 @@ class Domino extends THREE.Object3D
         this.caja = [];
         this.generarFichas();
 
-        this.jugador_1 = new Jugador("Miguel");
-        this.jugador_2 = new Jugador("Francisco");
+        this.jugador_1 = new Jugador("Miguel",1);
+        this.jugador_2 = new Jugador("Francisco",2);
 
-        var pos = 1
 
         for (var i=0; i<this.caja.length; i++)
-        {
-            this.caja[i].position.z = pos;
             this.add(this.caja[i]);
-            pos = pos + 1;
-        }
 
         this.repartirFichas();
+        this.jugador_1.colocarFichas();
+        this.jugador_2.colocarFichas();
             
     }
 
-    /*
-    * generarFichas: Función que generar todas las fichas que habrá disponibles en la caja
-    */
+    /**
+     * @description Se crean todas las fichas del juego y se añaden a la caja
+     */
     generarFichas()
     {
         this.caja.push(new Ficha(0,0,this.geometriasMitades));
@@ -65,18 +65,16 @@ class Domino extends THREE.Object3D
         this.caja.push(new Ficha(6,6,this.geometriasMitades));
 
     }
-
-
-    /*
-    * repartirFichas: Función que reparte aleatoriamente las fichas a los usuarios
-    */
+    /**
+     * @description Función que reparte las fichas aleatoriamente entre los jugadores
+     */
     repartirFichas()
     {
         this.jugador_1.clearFichas();
         while(this.jugador_1.fichas.length < 7)
         {
             this.caja = shuffle(this.caja);
-            this.jugador_1.addFicha(this.caja[this.caja.length]);
+            this.jugador_1.addFicha(this.caja[this.caja.length-1]);
             this.caja.pop();
         }
 
@@ -84,15 +82,17 @@ class Domino extends THREE.Object3D
         while(this.jugador_2.fichas.length < 7)
         {
             this.caja = shuffle(this.caja);
-            this.jugador_2.addFicha(this.caja[this.caja.length]);
+            this.jugador_2.addFicha(this.caja[this.caja.length-1]);
             this.caja.pop();
         }
     }
 }
 
-/*
-* shuffle: Función que mezcla un array
-*/
+/**
+ * @description Función que recibe un array como parámetro y lo mezcla
+ * @param {Array} array 
+ * @returns Array mezclaso
+ */
 function shuffle(array)
 {
     var currentIndex = array.length, tmp, randomIndex;
