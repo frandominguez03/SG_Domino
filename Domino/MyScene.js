@@ -203,7 +203,28 @@ class MyScene extends THREE.Scene {
     this.cameraControl.update();
 
   }
+  /**
+   * @description Función que traza un rayo y obtiene un array con todos los objetos atravesados por el rayo
+   * @param {Evento del ratón} event 
+   */
+  onDocumentMouseDown(event)
+  {
+    var mouse = new THREE.Vector2();
+    mouse.x = (event.clientX/window.innerWidth)*2 - 1;
+    mouse.y = 1 - 2 * (event.clientY/window.innerWidth);
+
+    var raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(mouse,this.camera);
+
+    var pickedObjects = raycaster.intersectObjects(this.children,true);
+    if(pickedObjects.length > 0)
+    {
+      pickedObjects[0].object.material.color.set( 0xff0000 );
+    }
+  }
 }
+
+
 
 
 /// La función   main
@@ -214,7 +235,10 @@ $(function () {
 
   // Se añaden los listener de la aplicación. En este caso, el que va a comprobar cuándo se modifica el tamaño de la ventana de la aplicación.
   window.addEventListener ("resize", () => scene.onWindowResize());
-  
+  //Click para firefox
+  window.addEventListener ("mousedown", (event) => scene.onDocumentMouseDown(event), true);
+  //Click para Chrome
+  window.addEventListener ("pointerdown", (event) => scene.onDocumentMouseDown(event), true);
   // Que no se nos olvide, la primera visualización.
   scene.update();
 });
