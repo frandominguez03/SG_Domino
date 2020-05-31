@@ -85,7 +85,7 @@ class Domino extends THREE.Object3D
             this.jugador_2.addFicha(this.caja[this.caja.length-1]);
             this.caja.pop();
         }
-        
+
         //Quitamos de la escena las fichas que no hayan sido repartidas
         for(var i = 0; i < this.caja.length; i++)
             this.remove(this.caja[i]); 
@@ -95,7 +95,7 @@ class Domino extends THREE.Object3D
 /**
  * @description Función que recibe un array como parámetro y lo mezcla
  * @param {Array} array 
- * @returns Array mezclaso
+ * @returns Array mezclado
  */
 function shuffle(array)
 {
