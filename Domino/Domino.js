@@ -85,6 +85,10 @@ class Domino extends THREE.Object3D
             this.jugador_2.addFicha(this.caja[this.caja.length-1]);
             this.caja.pop();
         }
+        
+        //Quitamos de la escena las fichas que no hayan sido repartidas
+        for(var i = 0; i < this.caja.length; i++)
+            this.remove(this.caja[i]); 
     }
 }
 
