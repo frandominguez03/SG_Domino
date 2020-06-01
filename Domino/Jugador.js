@@ -39,13 +39,12 @@ class Jugador
         {   var posZ = 1.5
             for(var i = 0; i < this.fichas.length; i++)
             {
-                this.fichas[i].scale.set(0.5,0.5,0.5);
                 this.fichas[i].rotation.y = Math.PI/2
-                this.fichas[i].position.y = 3.78;
+                this.fichas[i].position.y = 11;
                 this.fichas[i].position.z = posZ;
-                this.fichas[i].position.x = 1.5;
+                this.fichas[i].position.x = 5.5;
                 
-                posZ -= 0.5
+                posZ -= 1
             }
         }
 
@@ -54,13 +53,12 @@ class Jugador
             var posZ = 1.5
             for(var i = 0; i < this.fichas.length; i++)
             {
-                this.fichas[i].scale.set(0.5,0.5,0.5);
                 this.fichas[i].rotation.y = -Math.PI/2
-                this.fichas[i].position.y = 3.78;
+                this.fichas[i].position.y = 11;
                 this.fichas[i].position.z = posZ;
-                this.fichas[i].position.x = -1.5;
+                this.fichas[i].position.x = -5.5;
                 
-                posZ -= 0.5
+                posZ -= 1
             }
         }
 

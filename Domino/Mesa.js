@@ -6,7 +6,7 @@ class Mesa extends THREE.Object3D {
         super();
 
         // Creamos el tablero principal
-        var geometriaTablero = new THREE.BoxGeometry(4, 0.2, 4);
+        var geometriaTablero = new THREE.BoxGeometry(5, 0.2, 6);
 
         // Tendrá textura de madera
         var textura = new THREE.TextureLoader().load('../img/wood.jpg');
@@ -31,10 +31,10 @@ class Mesa extends THREE.Object3D {
         var soporte4 = new THREE.Mesh(geometriaSoporte, material);
 
         // Posicionamos los soportes donde corresponda
-        soporte1.position.set(-1.85, 1.7, -1.85);
-        soporte2.position.set(-1.85, 1.7, 1.85);
-        soporte3.position.set(1.85, 1.7, -1.85);
-        soporte4.position.set(1.85, 1.7, 1.85);
+        soporte1.position.set(-2.35, 1.7, -2.85);
+        soporte2.position.set(-2.35, 1.7, 2.85);
+        soporte3.position.set(2.35, 1.7, -2.85);
+        soporte4.position.set(2.35, 1.7, 2.85);
 
         // Los añadimos a la escena
         this.add(soporte1);
