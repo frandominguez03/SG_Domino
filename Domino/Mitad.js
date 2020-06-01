@@ -6,6 +6,7 @@ class Mitad extends THREE.Object3D
         this.material =  new THREE.MeshPhongMaterial({color: 0xFFFFFF});
         this.geometrias = [];
         var geoFicha = new THREE.BoxGeometry (0.5,0.75,0.2);
+        
 
         this.geometrias.push(geoFicha);
 
