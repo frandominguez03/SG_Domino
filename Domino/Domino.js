@@ -14,18 +14,13 @@ class Domino extends THREE.Object3D
         this.jugador_1 = new Jugador("Miguel",1);
         this.jugador_2 = new Jugador("Francisco",2);
 
-        var pos = 0;
         for (var i=0; i<this.caja.length; i++)
-        {
             this.add(this.caja[i]);
-            this.caja[i].position.x = pos;
-            pos = pos + 1;
-        }
             
 
-        // this.repartirFichas();
-        // this.jugador_1.colocarFichas();
-        // this.jugador_2.colocarFichas();
+        this.repartirFichas();
+        this.jugador_1.colocarFichas();
+        this.jugador_2.colocarFichas();
             
     }
 

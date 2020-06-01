@@ -15,23 +15,6 @@ class MyScene extends THREE.Scene {
     this.axis = new THREE.AxesHelper (5);
     this.add (this.axis);
 
-
-    // this.geometriasMitades = new Mitad();
-    
-    // this.ficha1 = new Ficha(0,1,this.geometriasMitades);
-    // this.ficha2 = new Ficha(2,3,this.geometriasMitades);
-    // this.ficha3 = new Ficha(4,5,this.geometriasMitades);
-    // this.ficha4 = new Ficha(6,6,this.geometriasMitades);
-
-    // this.ficha1.position.x = -1.5;
-    // this.ficha2.position.x = -0.75;
-    // this.ficha4.position.x = 0.75 
-
-    // this.add(this.ficha1);
-    // this.add(this.ficha2);
-    // this.add(this.ficha3);
-    // this.add(this.ficha4);
-
     this.juego = new Domino();
     this.add(this.juego);
 
@@ -108,7 +91,7 @@ class MyScene extends THREE.Scene {
     // En este caso la intensidad de la luz y si se muestran o no los ejes
     this.guiControls = new function() {
       // En el contexto de una función   this   alude a la función
-      this.lightIntensity = 0.5;
+      this.lightIntensity =1;
       this.axisOnOff = true;
     }
 
@@ -237,9 +220,9 @@ $(function () {
   // Se añaden los listener de la aplicación. En este caso, el que va a comprobar cuándo se modifica el tamaño de la ventana de la aplicación.
   window.addEventListener ("resize", () => scene.onWindowResize());
   //Click para firefox
-  window.addEventListener ("mousedown", (event) => scene.onDocumentMouseDown(event), true);
+  // window.addEventListener ("mousedown", (event) => scene.onDocumentMouseDown(event), true);
   //Click para Chrome
-  window.addEventListener ("pointerdown", (event) => scene.onDocumentMouseDown(event), true);
+  // window.addEventListener ("pointerdown", (event) => scene.onDocumentMouseDown(event), true);
   // Que no se nos olvide, la primera visualización.
   scene.update();
 });
