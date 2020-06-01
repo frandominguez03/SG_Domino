@@ -12,7 +12,7 @@ class Silla extends THREE.Object3D {
                 objectLoader.load('modeloSilla/Office_chair.obj',
                     function (object) {
                         var modelo = object;
-                        modelo.scale.set(0.005, 0.005, 0.005);
+                        modelo.scale.set(0.015, 0.015, 0.015);
                         that.add(modelo);
                     }, null, null);
             });
