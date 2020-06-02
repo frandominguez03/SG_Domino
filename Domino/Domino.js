@@ -127,29 +127,56 @@ class Domino extends THREE.Object3D
      */
     jugarFicha(f)
     {
-        console.log("Jugando una ficha")
+        console.log("Jugando la ficha")
+        console.log(f.valorSup);
+        console.log(f.valorInf);
         var resultado = this.comprobarFicha(f)
         if( resultado != false)
         {
             //Quitamos la casilla que se va a ocupar de la lista de casillas disponibles
             var pos = this.casillasDisponibles.indexOf(resultado);
-            this.casillasDisponibles.splice(pos,pos);
+            this.casillasDisponibles.splice(pos,1);
             //Escribo la casilla añadida en la matriz de casillas
-            if(resultado.x == f.getValorSup())
+            if(resultado.x == f.valorSup && resultado.x != -1)
             {
-                this.casillas[resultado.y][resultado.z+1] =  f.getValorSup();
-                this.casillas[resultado.y][resultado.z+2] =  f.getValorInf();
+                if(resultado.z > 10)
+                {
+                    this.casillas[resultado.y][resultado.z] = f.valorSup;
+                    this.casillas[resultado.y][resultado.z+1] = f.valorInf;
+                    this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y,resultado.z+2));
+                }else
+                {
+                    this.casillas[resultado.y][resultado.z] = f.valorSup;
+                    this.casillas[resultado.y][resultado.z-1] = f.valorInf;
+                    this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y,resultado.z-2));
+                }
             }
-            else
+            else if(resultado.x == f.valorInf && resultado.x != -1)
             {
-                this.casillas[resultado.y][resultado.z+1] =  f.getValorInf();
-                this.casillas[resultado.y][resultado.z+2] =  f.getValorSup();
+                if(resultado.z > 10)
+                {
+                    this.casillas[resultado.y][resultado.z] = f.valorInf;
+                    this.casillas[resultado.y][resultado.z+1] = f.valorSup;
+                    this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y,resultado.z+2));
+                }else
+                {
+                    this.casillas[resultado.y][resultado.z] = f.valorInf;
+                    this.casillas[resultado.y][resultado.z-1] = f.valorSup;
+                    this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y,resultado.z-2));
+                }
+            } else if(resultado.x == -1)    // Si es -1 significa que es la primera
+            {
+                this.casillas[resultado.y][resultado.z] = f.valorInf;
+                this.casillas[resultado.y][resultado.z+1] = f.valorSup;
+                this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y,resultado.z+2));
+                this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y,resultado.z-1));
+                console.log(this.casillasDisponibles);
             }
             this.jugadores[this.jugador_actual].jugarFicha(f);
             this.situarFichaEnTablero(f);
 
             console.log(this.casillas);
-            console.log(this.jugadores[this.jugador_actual].fichas)
+            //console.log(this.jugadores[this.jugador_actual].fichas)
             console.log(this.casillasDisponibles);
             return true;
         }
@@ -175,9 +202,10 @@ class Domino extends THREE.Object3D
      */
     comprobarFicha(f)
     {
+        console.log(f);
         for(var i = 0; i < this.casillasDisponibles.length; i++)
         {
-            if(f.getValorSup == this.casillasDisponibles[i].x || f.getValorInf == this.casillasDisponibles[i].x || this.casillasDisponibles[i].x == -1)
+            if(f.valorInf == this.casillasDisponibles[i].x || f.valorSup == this.casillasDisponibles[i].x || this.casillasDisponibles[i].x == -1)
                 return this.casillasDisponibles[i];
 
         }
