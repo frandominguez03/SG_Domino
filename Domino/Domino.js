@@ -9,6 +9,11 @@ class Domino extends THREE.Object3D
         // Array con las mitades
         this.geometriasMitades = new Mitad();
         this.caja = [];
+        //Matriz que controlará la posición de las fichas
+        this.casillas = new Array(10);
+        for(var i=0; i < 10; i++)
+            this.casillas[i] = new Array(10);
+        
         this.generarFichas();
 
         this.jugador_1 = new Jugador("Miguel",1);

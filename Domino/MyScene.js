@@ -3,6 +3,9 @@
 class MyScene extends THREE.Scene {
   constructor (myCanvas) { 
     super();
+
+    // Variable para controlar si el juego está iniciado
+    this.iniciado = false;
     
     this.renderer = this.createRenderer(myCanvas);
     
@@ -206,8 +209,39 @@ class MyScene extends THREE.Scene {
       pickedObjects[0].object.material.color.set( 0xff0000 );
     }
   }
-}
 
+  /**
+   * @description Función para iniciar el juego con una tecla del teclado
+   * @param {Evento del teclado} event 
+   */
+  onKeyPress(event) {
+    var x = event.which || event.keyCode;
+    
+    // Solo admitimos un pulsado de la tecla de inicio de juego para evitar movimientos no deseados de la cámara
+    if(!this.iniciado) {
+      if(x == 71 || x == 103) {
+        // Cambiamos la posición de la cámara
+        this.camera.position.set(20, 15, 0);
+  
+        // Cambiamos a dónde mira
+        var look = new THREE.Vector3 (0,13,0);
+        this.camera.lookAt(look);
+  
+        // Para el control de cámara usamos una clase que ya tiene implementado los movimientos de órbita
+        this.cameraControl = new THREE.TrackballControls (this.camera, this.renderer.domElement);
+        
+        // Se configuran las velocidades de los movimientos
+        this.cameraControl.rotateSpeed = 5;
+        this.cameraControl.zoomSpeed = -2;
+        this.cameraControl.panSpeed = 0.5;
+        // Debe orbitar con respecto al punto de mira de la cámara
+        this.cameraControl.target = look;
+      }
+    }
+    
+    this.iniciado = true;
+  }
+}
 
 
 
@@ -223,6 +257,8 @@ $(function () {
   // window.addEventListener ("mousedown", (event) => scene.onDocumentMouseDown(event), true);
   //Click para Chrome
   // window.addEventListener ("pointerdown", (event) => scene.onDocumentMouseDown(event), true);
+  // Pulsar tecla
+  window.addEventListener ("keypress", () => scene.onKeyPress(event));
   // Que no se nos olvide, la primera visualización.
   scene.update();
 });
