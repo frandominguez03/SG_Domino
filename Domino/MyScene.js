@@ -42,31 +42,31 @@ class MyScene extends THREE.Scene {
 
     this.add(this.mesa);
 
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[1]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    this.juego.cambioDeTurno();
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[1]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
-    this.juego.cambioDeTurno();
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[1]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[1]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+    // this.juego.cambioDeTurno();
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[1]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
+    // this.juego.cambioDeTurno();
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[1]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
 
-    this.juego.cambioDeTurno();
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[3]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+    // this.juego.cambioDeTurno();
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[3]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
 
-    this.juego.cambioDeTurno();
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[3]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+    // this.juego.cambioDeTurno();
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[3]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
     
 
 

@@ -140,7 +140,7 @@ class Domino extends THREE.Object3D
             if(resultado.x == f.valorSup && resultado.x != -1)
             {
                 //Si la coordenada J es > 10 se avanza hacia la derecha en la matriz
-                if(resultado.z > 10)
+                if(resultado.z > 10 && resultado.y < 15)
                 {
                     //Si la j es < 15 se avanza a la derecha únicamente
                     if(resultado.z < 15)
@@ -149,26 +149,36 @@ class Domino extends THREE.Object3D
                         this.casillas[resultado.y][resultado.z+1] = f.valorInf;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y,resultado.z+2));
                     }
-                    else //Si la j >= 15 se avanza hacia arriba en el tablero
+                    else if (resultado.y < 15)//Si la j <= 15 se avanza hacia arriba en el tablero
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorSup;
                         this.casillas[resultado.y+1][resultado.z] = f.valorInf;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y+2,resultado.z));
-                    }
-                    
-                }else  //En caso contrario se avanza hacia la izquierda
-                {
-                    if(resultado.z > 5)
+                    }else if (resultado.y >= 15) //Si la J >= 15 se cierra el rectángulo
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorSup;
                         this.casillas[resultado.y][resultado.z-1] = f.valorInf;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y,resultado.z-2));
                     }
-                    else
+                    
+                }else  //En caso contrario se avanza hacia la izquierda
+                {
+                    if(resultado.z > 5 && resultado.y < 15)
+                    {
+                        this.casillas[resultado.y][resultado.z] = f.valorSup;
+                        this.casillas[resultado.y][resultado.z-1] = f.valorInf;
+                        this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y,resultado.z-2));
+                    }
+                    else if (resultado.y < 15)
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorSup;
                         this.casillas[resultado.y+1][resultado.z] = f.valorInf;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y+2,resultado.z));
+                    }else if (resultado.y >= 15) //Si la J >= 15 se cierra el rectángulo
+                    {
+                        this.casillas[resultado.y][resultado.z] = f.valorSup;
+                        this.casillas[resultado.y][resultado.z+1] = f.valorInf;
+                        this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y,resultado.z+2));
                     }
 
                 }
@@ -185,11 +195,16 @@ class Domino extends THREE.Object3D
                         this.casillas[resultado.y][resultado.z+1] = f.valorSup;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y,resultado.z+2));
                     }
-                    else
+                    else if (resultado.y < 15)
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorInf;
                         this.casillas[resultado.y+1][resultado.z] = f.valorSup;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y+2,resultado.z));
+                    }else if (resultado.y >= 15) //Si la J >= 15 se cierra el rectángulo
+                    {
+                        this.casillas[resultado.y][resultado.z] = f.valorInf;
+                        this.casillas[resultado.y][resultado.z-1] = f.valorSup;
+                        this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y,resultado.z-2));
                     }
                     
                 }else //En caso contrario se avanza hacia la izquierda
@@ -200,11 +215,16 @@ class Domino extends THREE.Object3D
                         this.casillas[resultado.y][resultado.z-1] = f.valorSup;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y,resultado.z-2));
                     }
-                    else
+                    else if (resultado.y < 15)
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorInf;
                         this.casillas[resultado.y+1][resultado.z] = f.valorSup;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y+2,resultado.z)); 
+                    }else if (resultado.y >= 15) //Si la J >= 15 se cierra el rectángulo
+                    {
+                        this.casillas[resultado.y][resultado.z] = f.valorInf;
+                        this.casillas[resultado.y][resultado.z+1] = f.valorSup;
+                        this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y,resultado.z+2));
                     }
 
                 }
