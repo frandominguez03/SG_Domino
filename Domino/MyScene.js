@@ -42,6 +42,8 @@ class MyScene extends THREE.Scene {
 
     this.add(this.mesa);
 
+    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+
   }
   
   createCamera () {

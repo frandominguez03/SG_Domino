@@ -63,4 +63,13 @@ class Jugador
         }
 
     }
+    /**
+     * @description Se elimina una ficha de la lista de fichas del jugador
+     * @param {Ficha} f 
+     */
+    jugarFicha(f)
+    {  
+        var pos = this.fichas.indexOf(f);
+        this.fichas.splice(pos,1);
+    }
 }

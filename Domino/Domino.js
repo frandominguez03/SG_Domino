@@ -1,5 +1,6 @@
 class Domino extends THREE.Object3D
 {
+    
     /**
      * @description Constructor de la clase domino
      */
@@ -10,21 +11,35 @@ class Domino extends THREE.Object3D
         this.geometriasMitades = new Mitad();
         this.caja = [];
 
-        this.generarFichas();
+        //Matriz que controlará la posición de las fichas
+        this.TAM_MAX_CASILLAS = 20;
+        this.casillas = new Array(this.TAM_MAX_CASILLAS);
+        for(var i=0; i < this.TAM_MAX_CASILLAS; i++)
+            this.casillas[i] = new Array(this.TAM_MAX_CASILLAS);
 
-        this.jugador_1 = new Jugador("Miguel",1);
-        this.jugador_2 = new Jugador("Francisco",2);
+        this.inicializarCasillas();
+        //Este array estaráf formado por tuplas de valores que corresponderan al valor y la componente i , j de la matriz, estará inicializada a (TAM_MAX_CASILLAS/2,TAM_MAX_CASILLAS/2)
+        this.casillasDisponibles = new Array();
+        this.casillasDisponibles.push(new THREE.Vector3(-1,this.TAM_MAX_CASILLAS/2,this.TAM_MAX_CASILLAS/2));
+
+
+        this.generarFichas();
+        this.jugadores = new Array();
+        this.jugadores.push(new Jugador("Miguel",1));
+        this.jugadores.push(new Jugador("Francisco",2));
+
+        this.jugador_actual = 0;
 
         for (var i=0; i<this.caja.length; i++)
             this.add(this.caja[i]);
             
 
         this.repartirFichas();
-        this.jugador_1.colocarFichas();
-        this.jugador_2.colocarFichas();
+        this.jugadores[0].colocarFichas();
+        this.jugadores[1].colocarFichas();
+
             
     }
-
     /**
      * @description Se crean todas las fichas del juego y se añaden a la caja
      */
@@ -71,25 +86,103 @@ class Domino extends THREE.Object3D
      */
     repartirFichas()
     {
-        this.jugador_1.clearFichas();
-        while(this.jugador_1.fichas.length < 7)
-        {
-            this.caja = shuffle(this.caja);
-            this.jugador_1.addFicha(this.caja[this.caja.length-1]);
-            this.caja.pop();
-        }
 
-        this.jugador_2.clearFichas();
-        while(this.jugador_2.fichas.length < 7)
+        for(var i = 0; i < this.jugadores.length; i++)
         {
-            this.caja = shuffle(this.caja);
-            this.jugador_2.addFicha(this.caja[this.caja.length-1]);
-            this.caja.pop();
+            this.jugadores[i].clearFichas();
+            while(this.jugadores[i].fichas.length < 7)
+            {
+                this.caja = shuffle(this.caja);
+                this.jugadores[i].addFicha(this.caja[this.caja.length-1]);
+                this.caja.pop();
+            }
         }
 
         //Quitamos de la escena las fichas que no hayan sido repartidas
         for(var i = 0; i < this.caja.length; i++)
             this.remove(this.caja[i]); 
+    }
+    /**
+     * @description Función que inicializa la matriz a NaN
+     */
+    inicializarCasillas()
+    {
+        for(var i=0; i < this.TAM_MAX_CASILLAS; i++)
+            for(var j=0; j < this.TAM_MAX_CASILLAS; j++)
+                this.casillas[i][j]= NaN;
+    }
+
+    /**
+     * @description Cambio de turno de jugador actual al siguiente
+     */
+    cambioDeTurno()
+    {
+        this.jugador_actual =  (this.jugador_actual + 1) % 2;
+    }
+
+    /**
+     * @description Esta función colocará la ficha que se pasa por parámetro en su posición en el tablero y llamará a la función de igual nombre 
+     * @param {Ficha} f Ficha a jugar
+     * @returns True si se ha colocado correctamente o False si ha ocurrido algún problema 
+     */
+    jugarFicha(f)
+    {
+        console.log("Jugando una ficha")
+        var resultado = this.comprobarFicha(f)
+        if( resultado != false)
+        {
+            //Quitamos la casilla que se va a ocupar de la lista de casillas disponibles
+            var pos = this.casillasDisponibles.indexOf(resultado);
+            this.casillasDisponibles.splice(pos,pos);
+            //Escribo la casilla añadida en la matriz de casillas
+            if(resultado.x == f.getValorSup())
+            {
+                this.casillas[resultado.y][resultado.z+1] =  f.getValorSup();
+                this.casillas[resultado.y][resultado.z+2] =  f.getValorInf();
+            }
+            else
+            {
+                this.casillas[resultado.y][resultado.z+1] =  f.getValorInf();
+                this.casillas[resultado.y][resultado.z+2] =  f.getValorSup();
+            }
+            this.jugadores[this.jugador_actual].jugarFicha(f);
+            this.situarFichaEnTablero(f);
+
+            console.log(this.casillas);
+            console.log(this.jugadores[this.jugador_actual].fichas)
+            console.log(this.casillasDisponibles);
+            return true;
+        }
+        else
+            return false;
+
+    }
+
+    /**
+     * @description Esta función realizará la animación de colocar la ficha en el tablero
+     * @param {Ficha} f 
+     */
+    situarFichaEnTablero(f)
+    {
+        //Not implmented yet
+        return true;
+    }
+
+    /**
+     * @description Se comprueba si la ficha que se pretende jugar es válida (su valor superior o inferior coincide con el de una casilla válida)
+     * @param {Ficha} f 
+     * @returns En caso de que sea una casilla válida devuelve la casilla (en caso de que haya varias devuelve la primera que encuentre) en caso de que no sea válida devuelve false
+     */
+    comprobarFicha(f)
+    {
+        for(var i = 0; i < this.casillasDisponibles.length; i++)
+        {
+            if(f.getValorSup == this.casillasDisponibles[i].x || f.getValorInf == this.casillasDisponibles[i].x || this.casillasDisponibles[i].x == -1)
+                return this.casillasDisponibles[i];
+
+        }
+
+        return false;
     }
 }
 

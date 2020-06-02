@@ -8,39 +8,42 @@
     */
     constructor(valorSup, valorInf,mitades)
     {
-        super();
+      super();
 
-        var points = [];
-        points.push(new THREE.Vector2(0,-4));
-        for ( var i = 0; i < 4; i ++ )
-          points.push( new THREE.Vector2( Math.sin( i * 0.2 ) * 10 + 5, ( i - 5 ) * 2 ) );
-     
-        this.geometryRevolucion = new THREE.LatheGeometry( points );
-        this.materialRevolucion = new THREE.MeshPhongMaterial( { color: 0x000000, side: THREE.BackSide } )
-        
-        var material =  new THREE.MeshPhongMaterial({color: 0xf4f4f4});
+      this.valorSup = valorSup;
+      this.valorInf = valorInf;
 
-        this.sup = new THREE.Mesh(mitades.getGeometria(valorSup),material);
-        this.inf = new THREE.Mesh(mitades.getGeometria(valorInf),material);
-        this.sup = this.colocarObjetosRevolucion(this.sup, valorSup);
-        this.inf = this.colocarObjetosRevolucion(this.inf, valorInf);
+      var points = [];
+      points.push(new THREE.Vector2(0,-4));
+      for ( var i = 0; i < 4; i ++ )
+        points.push( new THREE.Vector2( Math.sin( i * 0.2 ) * 10 + 5, ( i - 5 ) * 2 ) );
 
-        //Realizo las modificaciones necesarias para que el centro de la ficha esté en el origen
-        this.sup.position.y = 0.375;
-        this.inf.position.y = -0.375;
+      this.geometryRevolucion = new THREE.LatheGeometry( points );
+      this.materialRevolucion = new THREE.MeshPhongMaterial( { color: 0x000000, side: THREE.BackSide } )
 
-        var geoTrasera = new THREE.BoxGeometry (0.5,1.5,0.01);
-        geoTrasera.translate(0,0,-0.1)
+      var material =  new THREE.MeshPhongMaterial({color: 0xf4f4f4});
 
-        this.material_negro = new THREE.MeshPhongMaterial({color: 0x00000});
-        this.trasera = new THREE.Mesh(geoTrasera,this.material_negro);
+      this.sup = new THREE.Mesh(mitades.getGeometria(valorSup),material);
+      this.inf = new THREE.Mesh(mitades.getGeometria(valorInf),material);
+      this.sup = this.colocarObjetosRevolucion(this.sup, valorSup);
+      this.inf = this.colocarObjetosRevolucion(this.inf, valorInf);
 
-        this.resultado = new THREE.Object3D();
-        this.resultado.add(this.sup,this.inf,this.trasera);
-  
-        this.add (this.resultado);
+      //Realizo las modificaciones necesarias para que el centro de la ficha esté en el origen
+      this.sup.position.y = 0.375;
+      this.inf.position.y = -0.375;
 
-      
+      var geoTrasera = new THREE.BoxGeometry (0.5,1.5,0.01);
+      geoTrasera.translate(0,0,-0.1)
+
+      this.material_negro = new THREE.MeshPhongMaterial({color: 0x00000});
+      this.trasera = new THREE.Mesh(geoTrasera,this.material_negro);
+
+      this.resultado = new THREE.Object3D();
+      this.resultado.add(this.sup,this.inf,this.trasera);
+
+      this.add (this.resultado);
+
+
     }
 
     /**
@@ -191,5 +194,22 @@
         return res;
       }
       
+    }
+
+    
+    /**
+     * @description Devuelve el valor superior de la ficha
+     */
+    getValorSup()
+    {
+      return this.valorSup;
+    }
+
+    /**
+     * @description Devuelve el valor inferior de la ficha
+     */
+    getValorInf()
+    {
+      return this.valorInf;
     }
   }
