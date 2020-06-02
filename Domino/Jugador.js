@@ -36,11 +36,11 @@ class Jugador
     colocarFichas()
     {
         if(this.numJugador == 1)
-        {   var posZ = 1.5
+        {   var posZ = 2.5
             for(var i = 0; i < this.fichas.length; i++)
             {
                 this.fichas[i].rotation.y = Math.PI/2
-                this.fichas[i].position.y = 11;
+                this.fichas[i].position.y = 10.3;
                 this.fichas[i].position.z = posZ;
                 this.fichas[i].position.x = 5.5;
                 
@@ -50,11 +50,11 @@ class Jugador
 
         if(this.numJugador == 2)
         {
-            var posZ = 1.5
+            var posZ = 2.5
             for(var i = 0; i < this.fichas.length; i++)
             {
                 this.fichas[i].rotation.y = -Math.PI/2
-                this.fichas[i].position.y = 11;
+                this.fichas[i].position.y = 10.3;
                 this.fichas[i].position.z = posZ;
                 this.fichas[i].position.x = -5.5;
                 

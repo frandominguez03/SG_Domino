@@ -16,7 +16,7 @@ class Mesa extends THREE.Object3D {
         var tablero = new THREE.Mesh(geometriaTablero, material);
 
         // Lo subimos lo necesario
-        tablero.position.set(0, 3.3, 0);
+        tablero.position.set(0, 3.1, 0);
 
         // Lo añadimos a la escena
         this.add(tablero);
@@ -31,10 +31,10 @@ class Mesa extends THREE.Object3D {
         var soporte4 = new THREE.Mesh(geometriaSoporte, material);
 
         // Posicionamos los soportes donde corresponda
-        soporte1.position.set(-2.35, 1.7, -2.85);
-        soporte2.position.set(-2.35, 1.7, 2.85);
-        soporte3.position.set(2.35, 1.7, -2.85);
-        soporte4.position.set(2.35, 1.7, 2.85);
+        soporte1.position.set(-2.35, 1.5, -2.85);
+        soporte2.position.set(-2.35, 1.5, 2.85);
+        soporte3.position.set(2.35, 1.5, -2.85);
+        soporte4.position.set(2.35, 1.5, 2.85);
 
         // Los añadimos a la escena
         this.add(soporte1);
