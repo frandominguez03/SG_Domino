@@ -255,7 +255,39 @@ class Domino extends THREE.Object3D
      */
     situarFichaEnTablero(f)
     {
-        //Not implmented yet
+        var that = this;
+        
+        // El origen es la posición actual de la ficha
+        this.origen = {x: f.position.x, y: f.position.y, z: f.position.z, rotationX: 0.0, rotationY: Math.PI/2};
+        
+        // El primer destino es para levantar y girar la ficha
+        this.destino = {y: 12.0, rotationX: Math.PI/2, rotationY: Math.PI};
+
+        var movimiento = new TWEEN.Tween(this.origen).to(this.destino, 1000)
+            .easing(TWEEN.Easing.Quadratic.InOut)
+            .onUpdate(function() {
+                f.rotation.x = that.origen.rotationX;
+                f.rotation.y = that.origen.rotationY;
+                f.position.y = that.origen.y;
+            });
+        
+        // Origen, igual que el destino anterior
+        this.origen2 = {x: 5.5, y: 12.0, z: 2.5, rotationY: Math.PI};
+
+        // Destino, el tablero. Depende de dónde vayamos a colocar la ficha. De momento está hardcodeado.
+        this.destino2 = {x: 0.0, y: 9.8, z: 0.0, rotationY: 0.0};
+        
+        var movimiento2 = new TWEEN.Tween(this.origen2).to(this.destino2, 2500)
+            .easing(TWEEN.Easing.Quadratic.InOut)
+            .onUpdate(function() {
+                f.position.x = that.origen2.x;
+                f.position.y = that.origen2.y;
+                f.position.z = that.origen2.z;
+            });
+        
+        movimiento.chain(movimiento2);
+        movimiento.start();
+
         return true;
     }
 
@@ -275,6 +307,10 @@ class Domino extends THREE.Object3D
         }
 
         return false;
+    }
+
+    update() {
+        TWEEN.update();
     }
 }
 

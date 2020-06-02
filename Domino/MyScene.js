@@ -223,6 +223,9 @@ class MyScene extends THREE.Scene {
     // Se actualiza la posición de la cámara según su controlador
     this.cameraControl.update();
 
+    // Actualizamos el juego
+    this.juego.update();
+
   }
   /**
    * @description Función que traza un rayo y obtiene un array con todos los objetos atravesados por el rayo
@@ -270,6 +273,8 @@ class MyScene extends THREE.Scene {
         this.cameraControl.panSpeed = 0.5;
         // Debe orbitar con respecto al punto de mira de la cámara
         this.cameraControl.target = look;
+
+        this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
       }
     }
     
