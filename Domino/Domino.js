@@ -18,10 +18,9 @@ class Domino extends THREE.Object3D
             this.casillas[i] = new Array(this.TAM_MAX_CASILLAS);
 
         this.inicializarCasillas();
-        //Este array estaráf formado por tuplas de valores que corresponderan al valor y la componente i , j de la matriz, estará inicializada a (TAM_MAX_CASILLAS/2,TAM_MAX_CASILLAS/2)
+        //Este array estará formado por tuplas de valores que corresponderan al valor y la componente i , j de la matriz, estará inicializada a (TAM_MAX_CASILLAS/2,TAM_MAX_CASILLAS/2)
         this.casillasDisponibles = new Array();
         this.casillasDisponibles.push(new THREE.Vector3(-1,this.TAM_MAX_CASILLAS/2,this.TAM_MAX_CASILLAS/2));
-
 
         this.generarFichas();
         this.jugadores = new Array();
@@ -31,15 +30,13 @@ class Domino extends THREE.Object3D
         this.jugador_actual = 0;
 
         for (var i=0; i<this.caja.length; i++)
-            this.add(this.caja[i]);
-            
+            this.add(this.caja[i]);          
 
         this.repartirFichas();
         this.jugadores[0].colocarFichas();
-        this.jugadores[1].colocarFichas();
-
-            
+        this.jugadores[1].colocarFichas();     
     }
+
     /**
      * @description Se crean todas las fichas del juego y se añaden a la caja
      */
@@ -81,6 +78,7 @@ class Domino extends THREE.Object3D
         this.caja.push(new Ficha(6,6,this.geometriasMitades));
 
     }
+
     /**
      * @description Función que reparte las fichas aleatoriamente entre los jugadores
      */
@@ -102,6 +100,7 @@ class Domino extends THREE.Object3D
         for(var i = 0; i < this.caja.length; i++)
             this.remove(this.caja[i]); 
     }
+
     /**
      * @description Función que inicializa la matriz a NaN
      */
@@ -215,12 +214,15 @@ class Domino extends THREE.Object3D
                         this.casillas[resultado.y][resultado.z-1] = f.valorSup;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y,resultado.z-2));
                     }
+
                     else if (resultado.y < 15)
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorInf;
                         this.casillas[resultado.y+1][resultado.z] = f.valorSup;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y+2,resultado.z)); 
-                    }else if (resultado.y >= 15) //Si la J >= 15 se cierra el rectángulo
+                    }
+
+                    else if (resultado.y >= 15) //Si la J >= 15 se cierra el rectángulo
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorInf;
                         this.casillas[resultado.y][resultado.z+1] = f.valorSup;
@@ -228,7 +230,9 @@ class Domino extends THREE.Object3D
                     }
 
                 }
-            } else if(resultado.x == -1)    // Si es -1 significa que es la primera
+            } 
+            
+            else if(resultado.x == -1)    // Si es -1 significa que es la primera
             {
                 this.casillas[resultado.y][resultado.z] = f.valorInf;
                 this.casillas[resultado.y][resultado.z+1] = f.valorSup;
@@ -236,8 +240,9 @@ class Domino extends THREE.Object3D
                 this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y,resultado.z-1));
                 console.log(this.casillasDisponibles);
             }
+
             this.jugadores[this.jugador_actual].jugarFicha(f);
-            this.situarFichaEnTablero(f);
+            this.situarFichaEnTablero(f, resultado);
 
             console.log(this.casillas);
             //console.log(this.jugadores[this.jugador_actual].fichas)
@@ -251,24 +256,26 @@ class Domino extends THREE.Object3D
 
     /**
      * @description Esta función realizará la animación de colocar la ficha en el tablero
-     * @param {Ficha} f 
+     * @param {Ficha} ficha La ficha que se va a posicionar
+     * @param {Vector3} resultado La posición en la que se va a posicionar
      */
-    situarFichaEnTablero(f)
+    situarFichaEnTablero(ficha, resultado)
     {
         var that = this;
+        console.log(resultado);
         
         // El origen es la posición actual de la ficha
-        this.origen = {x: f.position.x, y: f.position.y, z: f.position.z, rotationX: 0.0, rotationY: Math.PI/2};
+        this.origen = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: Math.PI/2};
         
         // El primer destino es para levantar y girar la ficha
-        this.destino = {y: 12.0, rotationX: Math.PI/2, rotationY: Math.PI};
+        this.destino = {y: 12.0, rotationX: Math.PI/2, rotationY: 0.0};
 
         var movimiento = new TWEEN.Tween(this.origen).to(this.destino, 1000)
             .easing(TWEEN.Easing.Quadratic.InOut)
             .onUpdate(function() {
-                f.rotation.x = that.origen.rotationX;
-                f.rotation.y = that.origen.rotationY;
-                f.position.y = that.origen.y;
+                ficha.rotation.x = -that.origen.rotationX;
+                ficha.rotation.y = that.origen.rotationY;
+                ficha.position.y = that.origen.y;
             });
         
         // Origen, igual que el destino anterior
@@ -280,9 +287,9 @@ class Domino extends THREE.Object3D
         var movimiento2 = new TWEEN.Tween(this.origen2).to(this.destino2, 2500)
             .easing(TWEEN.Easing.Quadratic.InOut)
             .onUpdate(function() {
-                f.position.x = that.origen2.x;
-                f.position.y = that.origen2.y;
-                f.position.z = that.origen2.z;
+                ficha.position.x = that.origen2.x;
+                ficha.position.y = that.origen2.y;
+                ficha.position.z = that.origen2.z;
             });
         
         movimiento.chain(movimiento2);
@@ -298,7 +305,7 @@ class Domino extends THREE.Object3D
      */
     comprobarFicha(f)
     {
-        console.log(f);
+
         for(var i = 0; i < this.casillasDisponibles.length; i++)
         {
             if(f.valorInf == this.casillasDisponibles[i].x || f.valorSup == this.casillasDisponibles[i].x || this.casillasDisponibles[i].x == -1)
@@ -309,6 +316,9 @@ class Domino extends THREE.Object3D
         return false;
     }
 
+    /**
+     * @description El método update
+     */
     update() {
         TWEEN.update();
     }
