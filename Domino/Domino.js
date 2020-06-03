@@ -129,8 +129,9 @@ class Domino extends THREE.Object3D
         console.log("Jugando la ficha")
         console.log(f.valorSup);
         console.log(f.valorInf);
-        var resultado = this.comprobarFicha(f)
-        if( resultado != false)
+        var resultado = this.comprobarFicha(f);
+
+        if(resultado != false)
         {
             //Quitamos la casilla que se va a ocupar de la lista de casillas disponibles
             var pos = this.casillasDisponibles.indexOf(resultado);
@@ -153,14 +154,16 @@ class Domino extends THREE.Object3D
                         this.casillas[resultado.y][resultado.z] = f.valorSup;
                         this.casillas[resultado.y+1][resultado.z] = f.valorInf;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y+2,resultado.z));
-                    }else if (resultado.y >= 15) //Si la J >= 15 se cierra el rectángulo
+                    }
+                    else if (resultado.y >= 15) //Si la J >= 15 se cierra el rectángulo
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorSup;
                         this.casillas[resultado.y][resultado.z-1] = f.valorInf;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y,resultado.z-2));
                     }
                     
-                }else  //En caso contrario se avanza hacia la izquierda
+                }
+                else  //En caso contrario se avanza hacia la izquierda
                 {
                     if(resultado.z > 5 && resultado.y < 15)
                     {
@@ -179,7 +182,6 @@ class Domino extends THREE.Object3D
                         this.casillas[resultado.y][resultado.z+1] = f.valorInf;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y,resultado.z+2));
                     }
-
                 }
             }
             else if(resultado.x == f.valorInf && resultado.x != -1)
@@ -206,7 +208,8 @@ class Domino extends THREE.Object3D
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y,resultado.z-2));
                     }
                     
-                }else //En caso contrario se avanza hacia la izquierda
+                }
+                else //En caso contrario se avanza hacia la izquierda
                 {
                     if(resultado.z > 5)
                     {
@@ -228,7 +231,6 @@ class Domino extends THREE.Object3D
                         this.casillas[resultado.y][resultado.z+1] = f.valorSup;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y,resultado.z+2));
                     }
-
                 }
             } 
             
@@ -257,12 +259,12 @@ class Domino extends THREE.Object3D
     /**
      * @description Esta función realizará la animación de colocar la ficha en el tablero
      * @param {Ficha} ficha La ficha que se va a posicionar
-     * @param {Vector3} resultado La posición en la que se va a posicionar
+     * @param {Vector3} resultado Contiene la posición en la matriz de casillas, que nos servirá para colocar la ficha en el espacio
      */
     situarFichaEnTablero(ficha, resultado)
     {
         var that = this;
-        console.log(resultado);
+        console.log(ficha);
         
         // El origen es la posición actual de la ficha
         this.origen = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: Math.PI/2};
@@ -279,10 +281,14 @@ class Domino extends THREE.Object3D
             });
         
         // Origen, igual que el destino anterior
-        this.origen2 = {x: 5.5, y: 12.0, z: 2.5, rotationY: Math.PI};
+        this.origen2 = {x: ficha.position.x, y: 12.0, z: ficha.position.z, rotationY: Math.PI};
+
+        // Para el destino, llamamos a la función auxiliar
+        // que nos devolverá una tupla (x, z) a donde trasladaremos la ficha
+        var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
 
         // Destino, el tablero. Depende de dónde vayamos a colocar la ficha. De momento está hardcodeado.
-        this.destino2 = {x: 0.0, y: 9.8, z: 0.0, rotationY: 0.0};
+        this.destino2 = {x: tuplaDestino.x, y: 9.8, z: tuplaDestino.z, rotationY: 0.0};
         
         var movimiento2 = new TWEEN.Tween(this.origen2).to(this.destino2, 2500)
             .easing(TWEEN.Easing.Quadratic.InOut)
@@ -296,6 +302,26 @@ class Domino extends THREE.Object3D
         movimiento.start();
 
         return true;
+    }
+
+    /**
+     * @description Devuelve dos valores con la posición en el espacio que le corresponde a una ficha según su posición en la matriz
+     * @param {int} fila 
+     * @param {int} columna 
+     * @returns Dos valores, enteros, con la posición en el espacio que corresponde
+     */
+    obtenerPosicionEspacio(fila, columna) 
+    {
+        // Cada ficha está compuesta por 2 mitades. Cada mitad mide 0.75 de alto, por tanto, una ficha mide 1.5 unidades de alto.
+        // El centro de nuestro tablero corresponde a la posición (10, 10) de la matriz
+        // Por tanto, por cada unidad de diferencia con la posición (10, 10) habrá que separar en x o z 1.5 unidades
+
+        var difFila = 10-fila;
+        var difCol = 10-columna;
+
+        var resultado = {x: difFila*1.5, z: difCol*1.5};
+
+        return resultado;
     }
 
     /**
