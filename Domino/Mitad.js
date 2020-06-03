@@ -122,10 +122,6 @@ class Mitad extends THREE.Object3D
         finalResult = finalResult.toGeometry();
 
         this.geometrias.push(finalResult);
-
-
-
-        this.add (this.geometrias);
     
     }
 

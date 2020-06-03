@@ -75,7 +75,6 @@ class MyScene extends THREE.Scene {
     this.guiControls = new function() {
       // En el contexto de una función   this   alude a la función
       this.lightIntensity =1;
-      this.axisOnOff = true;
     }
 
     // Se crea una sección para los controles de esta clase
@@ -83,9 +82,6 @@ class MyScene extends THREE.Scene {
     
     // Se le añade un control para la intensidad de la luz
     folder.add (this.guiControls, 'lightIntensity', 0, 1, 0.1).name('Intensidad de la Luz : ');
-    
-    // Y otro para mostrar u ocultar los ejes
-    folder.add (this.guiControls, 'axisOnOff').name ('Mostrar ejes : ');
     
     return gui;
   }
@@ -163,8 +159,6 @@ class MyScene extends THREE.Scene {
     // Se actualiza la intensidad de la luz con lo que haya indicado el usuario en la gui
     this.spotLight.intensity = this.guiControls.lightIntensity;
     
-    // Se muestran o no los ejes según lo que idique la GUI
-    this.axis.visible = this.guiControls.axisOnOff;
     
     // Se actualiza la posición de la cámara según su controlador
     this.cameraControl.update();
@@ -181,7 +175,7 @@ class MyScene extends THREE.Scene {
   {
     var mouse = new THREE.Vector2();
     mouse.x = (event.clientX/window.innerWidth)*2 - 1;
-    mouse.y = 1 - 2 * (event.clientY/window.innerWidth);
+    mouse.y = 1 - 2 * (event.clientY/window.innerHeight);
 
     var raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(mouse,this.camera);
