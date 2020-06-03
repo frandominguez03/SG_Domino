@@ -249,6 +249,7 @@ class Domino extends THREE.Object3D
             console.log(this.casillas);
             //console.log(this.jugadores[this.jugador_actual].fichas)
             console.log(this.casillasDisponibles);
+            //Aquí iría cambio de turno
             return true;
         }
         else

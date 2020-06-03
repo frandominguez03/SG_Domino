@@ -1,4 +1,3 @@
- 
 /// La clase fachada del modelo
 class MyScene extends THREE.Scene {
   constructor (myCanvas) { 
@@ -14,9 +13,6 @@ class MyScene extends THREE.Scene {
     this.createLights ();
   
     this.createCamera ();
-
-    this.axis = new THREE.AxesHelper (5);
-    this.add (this.axis);
 
     this.juego = new Domino();
     this.add(this.juego);
@@ -41,36 +37,6 @@ class MyScene extends THREE.Scene {
     this.mesa.scale.set(3, 3, 3);
 
     this.add(this.mesa);
-
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[1]);
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    // this.juego.cambioDeTurno();
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[1]);
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
-    // this.juego.cambioDeTurno();
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[1]);
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-
-    // this.juego.cambioDeTurno();
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[3]);
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-
-    // this.juego.cambioDeTurno();
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[3]);
-    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    
-
-
-
 
   }
   
@@ -97,27 +63,7 @@ class MyScene extends THREE.Scene {
     // Debe orbitar con respecto al punto de mira de la cámara
     this.cameraControl.target = look;
   }
-  
-  createGround () {
-    // El suelo es un Mesh, necesita una geometría y un material.
-    
-    // La geometría es una caja con muy poca altura
-    var geometryGround = new THREE.BoxGeometry (50,0.2,50);
-    
-    // El material se hará con una textura de madera
-    var texture = new THREE.TextureLoader().load('../imgs/wood.jpg');
-    var materialGround = new THREE.MeshPhongMaterial ({map: texture});
-    
-    // Ya se puede construir el Mesh
-    var ground = new THREE.Mesh (geometryGround, materialGround);
-    
-    // Todas las figuras se crean centradas en el origen.
-    // El suelo lo bajamos la mitad de su altura para que el origen del mundo se quede en su lado superior
-    ground.position.y = -0.1;
-    
-    // Que no se nos olvide añadirlo a la escena, que en este caso es  this
-    this.add (ground);
-  }
+
   
   createGUI () {
     // Se crea la interfaz gráfica de usuario
@@ -246,7 +192,6 @@ class MyScene extends THREE.Scene {
       console.log("Se ha pickeado :");
       console.log(pickedObjects[0].object.userData);
       this.juego.jugarFicha(pickedObjects[0].object.userData);
-      
     }
   }
 
@@ -277,6 +222,12 @@ class MyScene extends THREE.Scene {
         // Debe orbitar con respecto al punto de mira de la cámara
         this.cameraControl.target = look;
       }
+    }
+
+    if(x == 80 || x == 112)
+    {
+      this.juego.cambioDeTurno();
+      console.log("Se ha cambiado de turno");
     }
     
     this.iniciado = true;

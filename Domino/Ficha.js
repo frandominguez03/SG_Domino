@@ -29,6 +29,7 @@
       //El campo userData es necesario para que cuando se pickee un Mesh que forma una ficha represente a la ficha entera
       this.sup.userData = this;
       this.inf.userData = this;
+      
       this.sup = this.colocarObjetosRevolucion(this.sup, valorSup);
       this.inf = this.colocarObjetosRevolucion(this.inf, valorInf);
 
