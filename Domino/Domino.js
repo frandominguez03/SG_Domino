@@ -381,12 +381,19 @@ class Domino extends THREE.Object3D
             movimiento.start();
         }
 
+        // Coinciden parte inferior (de la ficha a poner) con parte inferior de la ficha ya puesta
         else if(ficha.valorInf == this.casillas[resultado.y][resultado.z]) {
-            console.log("ey");
+            console.log("Not implemented yet.");
         }
 
+        // Coinciden parte inferior (de la ficha a poner) con parte superior de la ficha ya puesta
         else if(ficha.valorInf == this.casillas[resultado.y][resultado.z+1]) {
-            console.log("ey");
+            console.log("Not implemented yet.");
+        }
+
+        // Si es una ficha doble, la tenemos que poner en horizontal
+        else if(ficha.valorSup == ficha.valorInf) {
+            console.log("Not implemented yet.");
         }
 
         return true;
