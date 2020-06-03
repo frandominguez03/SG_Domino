@@ -348,6 +348,14 @@ class Domino extends THREE.Object3D
     update() {
         TWEEN.update();
     }
+    /**
+     * @description Devuelve una lista con las fichas seleccionables en cada momento
+     * Las fichas seleccionables en cada momento serán las que tenga el jugador actual en su turno
+     */
+    getFichasSeleccionables()
+    {
+        return this.jugadores[this.jugador_actual].fichas;
+    }
 }
 
 /**

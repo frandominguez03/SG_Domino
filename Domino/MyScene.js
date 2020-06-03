@@ -42,31 +42,31 @@ class MyScene extends THREE.Scene {
 
     this.add(this.mesa);
 
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[1]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    this.juego.cambioDeTurno();
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[1]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
-    this.juego.cambioDeTurno();
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[1]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[1]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+    // this.juego.cambioDeTurno();
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[1]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
+    // this.juego.cambioDeTurno();
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[1]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
 
-    this.juego.cambioDeTurno();
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[3]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+    // this.juego.cambioDeTurno();
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[3]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
 
-    this.juego.cambioDeTurno();
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[3]);
-    this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
+    // this.juego.cambioDeTurno();
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[2]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[3]);
+    // this.juego.jugarFicha(this.juego.jugadores[this.juego.jugador_actual].fichas[0]);
     
 
 
@@ -240,10 +240,13 @@ class MyScene extends THREE.Scene {
     var raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(mouse,this.camera);
 
-    var pickedObjects = raycaster.intersectObjects(this.children,true);
+    var pickedObjects = raycaster.intersectObjects(this.juego.getFichasSeleccionables(),true);
     if(pickedObjects.length > 0)
     {
-      pickedObjects[0].object.material.color.set( 0xff0000 );
+      console.log("Se ha pickeado :");
+      console.log(pickedObjects[0].object.userData);
+      this.juego.jugarFicha(pickedObjects[0].object.userData);
+      
     }
   }
 
@@ -291,9 +294,9 @@ $(function () {
   // Se añaden los listener de la aplicación. En este caso, el que va a comprobar cuándo se modifica el tamaño de la ventana de la aplicación.
   window.addEventListener ("resize", () => scene.onWindowResize());
   //Click para firefox
-  // window.addEventListener ("mousedown", (event) => scene.onDocumentMouseDown(event), true);
+  window.addEventListener ("mousedown", (event) => scene.onDocumentMouseDown(event), true);
   //Click para Chrome
-  // window.addEventListener ("pointerdown", (event) => scene.onDocumentMouseDown(event), true);
+  window.addEventListener ("pointerdown", (event) => scene.onDocumentMouseDown(event), true);
   // Pulsar tecla
   window.addEventListener ("keypress", () => scene.onKeyPress(event));
   // Que no se nos olvide, la primera visualización.

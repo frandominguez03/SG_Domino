@@ -13,6 +13,7 @@
       this.valorSup = valorSup;
       this.valorInf = valorInf;
 
+
       var points = [];
       points.push(new THREE.Vector2(0,-4));
       for ( var i = 0; i < 4; i ++ )
@@ -25,6 +26,9 @@
 
       this.sup = new THREE.Mesh(mitades.getGeometria(valorSup),material);
       this.inf = new THREE.Mesh(mitades.getGeometria(valorInf),material);
+      //El campo userData es necesario para que cuando se pickee un Mesh que forma una ficha represente a la ficha entera
+      this.sup.userData = this;
+      this.inf.userData = this;
       this.sup = this.colocarObjetosRevolucion(this.sup, valorSup);
       this.inf = this.colocarObjetosRevolucion(this.inf, valorInf);
 
@@ -66,6 +70,7 @@
 
         case 1:
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.z = 0.13;
@@ -74,11 +79,13 @@
 
         case 2:
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.set(0.15,0.2,0.13);
           res.add(this.lathe);
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.set(-0.15,-0.2,0.13);
@@ -87,16 +94,19 @@
 
         case 3:
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.z = 0.13;
           res.add(this.lathe);
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.set(0.15,0.2,0.13);
           res.add(this.lathe);
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.set(-0.15,-0.2,0.13);
@@ -105,21 +115,25 @@
 
         case 4:
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.set(0.15,0.2,0.13);
           res.add(this.lathe);
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.set(-0.15,0.2,0.13);
           res.add(this.lathe);
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.set(0.15,-0.2,0.13);
           res.add(this.lathe);
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.set(-0.15,-0.2,0.13);
@@ -128,26 +142,31 @@
 
         case 5:
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.z = 0.13;
           res.add(this.lathe);
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.set(0.15,0.2,0.13);
           res.add(this.lathe);
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.set(-0.15,0.2,0.13);
           res.add(this.lathe);
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.set(0.15,-0.2,0.13);
           res.add(this.lathe);
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.set(-0.15,-0.2,0.13);
@@ -156,31 +175,37 @@
 
         case 6:
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.set(0.15,0.2,0.13);
           res.add(this.lathe);
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.set(-0.15,0.2,0.13);
           res.add(this.lathe);
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.set(0.15,0,0.13);
           res.add(this.lathe);
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.set(-0.15,0,0.13);
           res.add(this.lathe);
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.set(0.15,-0.2,0.13);
           res.add(this.lathe);
           this.lathe = new THREE.Mesh( this.geometryRevolucion,this.materialRevolucion );
+          this.lathe.userData = this;
           this.lathe.scale.set(0.005,0.005,0.005);
           this.lathe.rotation.x = Math.PI/2
           this.lathe.position.set(-0.15,-0.2,0.13);
