@@ -265,42 +265,129 @@ class Domino extends THREE.Object3D
     situarFichaEnTablero(ficha, resultado)
     {
         var that = this;
-        console.log(ficha);
         
-        // El origen es la posición actual de la ficha
-        this.origen = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: Math.PI/2};
-        
-        // El primer destino es para levantar y girar la ficha
-        this.destino = {y: 12.0, rotationX: Math.PI/2, rotationY: 0.0};
+        // Primera ficha. La colocamos directamente.
+        if(resultado.y == 10 && resultado.z == 10) {
+            // El origen es la posición actual de la ficha
+            this.origen0 = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: Math.PI/2};
+            
+            // El primer destino es para levantar y girar la ficha
+            this.destino0 = {y: 12.0, rotationX: Math.PI/2, rotationY: 0.0};
 
-        var movimiento = new TWEEN.Tween(this.origen).to(this.destino, 1000)
+            var movimiento = new TWEEN.Tween(this.origen0).to(this.destino0, 1000)
             .easing(TWEEN.Easing.Quadratic.InOut)
-            .onUpdate(function() {
-                ficha.rotation.x = -that.origen.rotationX;
-                ficha.rotation.y = that.origen.rotationY;
-                ficha.position.y = that.origen.y;
-            });
-        
-        // Origen, igual que el destino anterior
-        this.origen2 = {x: ficha.position.x, y: 12.0, z: ficha.position.z, rotationY: Math.PI};
+                .onUpdate(function() {
+                    ficha.rotation.x = -that.origen0.rotationX;
+                    ficha.rotation.y = that.origen0.rotationY;
+                    ficha.position.y = that.origen0.y;
+                });
+            
+            // Origen, igual que el destino anterior
+            this.origen00 = {x: ficha.position.x, y: 12.0, z: ficha.position.z, rotationY: Math.PI};
 
-        // Para el destino, llamamos a la función auxiliar
-        // que nos devolverá una tupla (x, z) a donde trasladaremos la ficha
-        var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+            // Para el destino, llamamos a la función auxiliar
+            // que nos devolverá una tupla (x, z) a donde trasladaremos la ficha
+            var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
 
-        // Destino, el tablero. Depende de dónde vayamos a colocar la ficha. De momento está hardcodeado.
-        this.destino2 = {x: tuplaDestino.x, y: 9.8, z: tuplaDestino.z, rotationY: 0.0};
+            // Destino, el tablero. Depende de dónde vayamos a colocar la ficha. De momento está hardcodeado.
+            this.destino00 = {x: tuplaDestino.x, y: 9.8, z: tuplaDestino.z, rotationY: 0.0};
+            
+            var movimiento2 = new TWEEN.Tween(this.origen00).to(this.destino00, 2500)
+                .easing(TWEEN.Easing.Quadratic.InOut)
+                .onUpdate(function() {
+                    ficha.position.x = that.origen00.x;
+                    ficha.position.y = that.origen00.y;
+                    ficha.position.z = that.origen00.z;
+                });
+            
+            movimiento.chain(movimiento2);
+            movimiento.start();
+        }
         
-        var movimiento2 = new TWEEN.Tween(this.origen2).to(this.destino2, 2500)
+        // Coinciden parte superior (de la ficha a poner) con parte inferior de la ficha ya puesta
+        else if(ficha.valorSup == this.casillas[resultado.y][resultado.z]) {
+            console.log(ficha.valorSup + " y " + this.casillas[resultado.y][resultado.z]);
+            // El origen es la posición actual de la ficha
+            this.origen1 = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: Math.PI/2};
+            
+            // El primer destino es para levantar y girar la ficha
+            this.destino1 = {y: 12.0, rotationX: -Math.PI/2, rotationY: Math.PI};
+
+            var movimiento = new TWEEN.Tween(this.origen1).to(this.destino1, 1000)
             .easing(TWEEN.Easing.Quadratic.InOut)
-            .onUpdate(function() {
-                ficha.position.x = that.origen2.x;
-                ficha.position.y = that.origen2.y;
-                ficha.position.z = that.origen2.z;
-            });
-        
-        movimiento.chain(movimiento2);
-        movimiento.start();
+                .onUpdate(function() {
+                    ficha.rotation.x = -that.origen1.rotationX;
+                    ficha.rotation.y = that.origen1.rotationY;
+                    ficha.position.y = that.origen1.y;
+                });
+
+            // Origen, igual que el destino anterior
+            this.origen11 = {x: ficha.position.x, y: 12.0, z: ficha.position.z, rotationY: Math.PI};
+
+            // Para el destino, llamamos a la función auxiliar
+            // que nos devolverá una tupla (x, z) a donde trasladaremos la ficha
+            var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+
+            // Destino, el tablero. Depende de dónde vayamos a colocar la ficha. De momento está hardcodeado.
+            this.destino11 = {x: tuplaDestino.x, y: 9.8, z: tuplaDestino.z, rotationY: 0.0};
+            
+            var movimiento2 = new TWEEN.Tween(this.origen11).to(this.destino11, 2500)
+                .easing(TWEEN.Easing.Quadratic.InOut)
+                .onUpdate(function() {
+                    ficha.position.x = that.origen11.x;
+                    ficha.position.y = that.origen11.y;
+                    ficha.position.z = that.origen11.z;
+                });
+            
+            movimiento.chain(movimiento2);
+            movimiento.start();
+        }
+
+        // Coinciden parte superior (de la ficha a poner) con parte superior de la ficha ya puesta
+        else if(ficha.valorSup == this.casillas[resultado.y][resultado.z+1]) {
+            // El origen es la posición actual de la ficha
+            this.origen2 = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: Math.PI/2};
+            
+            // El primer destino es para levantar y girar la ficha
+            this.destino2 = {y: 12.0, rotationX: Math.PI/2, rotationY: 0.0};
+
+            var movimiento = new TWEEN.Tween(this.origen2).to(this.destino2, 1000)
+            .easing(TWEEN.Easing.Quadratic.InOut)
+                .onUpdate(function() {
+                    ficha.rotation.x = -that.origen2.rotationX;
+                    ficha.rotation.y = -that.origen2.rotationY;
+                    ficha.position.y = that.origen2.y;
+                });
+            
+            // Origen, igual que el destino anterior
+            this.origen22 = {x: ficha.position.x, y: 12.0, z: ficha.position.z, rotationY: Math.PI};
+
+            // Para el destino, llamamos a la función auxiliar
+            // que nos devolverá una tupla (x, z) a donde trasladaremos la ficha
+            var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+
+            // Destino, el tablero. Depende de dónde vayamos a colocar la ficha. De momento está hardcodeado.
+            this.destino22 = {x: tuplaDestino.x, y: 9.8, z: tuplaDestino.z, rotationY: 0.0};
+            
+            var movimiento2 = new TWEEN.Tween(this.origen22).to(this.destino22, 2500)
+                .easing(TWEEN.Easing.Quadratic.InOut)
+                .onUpdate(function() {
+                    ficha.position.x = that.origen22.x;
+                    ficha.position.y = that.origen22.y;
+                    ficha.position.z = that.origen22.z;
+                });
+            
+            movimiento.chain(movimiento2);
+            movimiento.start();
+        }
+
+        else if(ficha.valorInf == this.casillas[resultado.y][resultado.z]) {
+            console.log("ey");
+        }
+
+        else if(ficha.valorInf == this.casillas[resultado.y][resultado.z+1]) {
+            console.log("ey");
+        }
 
         return true;
     }
@@ -320,7 +407,17 @@ class Domino extends THREE.Object3D
         var difFila = 10-fila;
         var difCol = 10-columna;
 
-        var resultado = {x: difFila*1.5, z: difCol*1.5};
+        console.log(difCol);
+
+        if(difCol < 0){
+            difCol = (difCol*1.5)/2;
+        }
+
+        else {
+            difCol = difCol*1.5;
+        }
+
+        var resultado = {x: difFila*1.5, z: difCol};
 
         return resultado;
     }

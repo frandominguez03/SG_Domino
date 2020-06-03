@@ -49,19 +49,9 @@ class MyScene extends THREE.Scene {
     // También se indica dónde se coloca
     this.camera.position.set (15, 20, 45);
     // Y hacia dónde mira
-    var look = new THREE.Vector3 (0,0,0);
+    var look = new THREE.Vector3 (0,13,0);
     this.camera.lookAt(look);
     this.add (this.camera);
-    
-    // Para el control de cámara usamos una clase que ya tiene implementado los movimientos de órbita
-    this.cameraControl = new THREE.TrackballControls (this.camera, this.renderer.domElement);
-    
-    // Se configuran las velocidades de los movimientos
-    this.cameraControl.rotateSpeed = 5;
-    this.cameraControl.zoomSpeed = -2;
-    this.cameraControl.panSpeed = 0.5;
-    // Debe orbitar con respecto al punto de mira de la cámara
-    this.cameraControl.target = look;
   }
 
   
@@ -158,13 +148,12 @@ class MyScene extends THREE.Scene {
     // Se actualizan los elementos de la escena para cada frame
     // Se actualiza la intensidad de la luz con lo que haya indicado el usuario en la gui
     this.spotLight.intensity = this.guiControls.lightIntensity;
-    
-    
-    // Se actualiza la posición de la cámara según su controlador
-    this.cameraControl.update();
 
     // Actualizamos el juego
     this.juego.update();
+
+    // TWEEN
+    TWEEN.update();
 
   }
   /**
@@ -186,6 +175,9 @@ class MyScene extends THREE.Scene {
       console.log("Se ha pickeado :");
       console.log(pickedObjects[0].object.userData);
       this.juego.jugarFicha(pickedObjects[0].object.userData);
+
+      // Animación para cambiar la cámara, al cambiar el turno
+      
     }
   }
 
@@ -199,22 +191,22 @@ class MyScene extends THREE.Scene {
     // Solo admitimos un pulsado de la tecla de inicio de juego para evitar movimientos no deseados de la cámara
     if(!this.iniciado) {
       if(x == 71 || x == 103) {
-        // Cambiamos la posición de la cámara
-        this.camera.position.set(20, 15, 0);
-  
-        // Cambiamos a dónde mira
-        var look = new THREE.Vector3 (0,13,0);
-        this.camera.lookAt(look);
-  
-        // Para el control de cámara usamos una clase que ya tiene implementado los movimientos de órbita
-        this.cameraControl = new THREE.TrackballControls (this.camera, this.renderer.domElement);
+        var that = this;
+
+        var origen = {x: 15, y: 20, z: 45};
+        var destino = {x: 20, y: 15, z: 0};
+
+        var animacionCamara = new TWEEN.Tween(origen)
+          .to(destino, 2000)
+          .easing(TWEEN.Easing.Quadratic.InOut)
+          .onUpdate(function() {
+            that.camera.position.set(origen.x, origen.y, origen.z);
+            // Cambiamos a dónde mira
+            var look = new THREE.Vector3 (0,13,0);
+            that.camera.lookAt(look);
+          });
         
-        // Se configuran las velocidades de los movimientos
-        this.cameraControl.rotateSpeed = 5;
-        this.cameraControl.zoomSpeed = -2;
-        this.cameraControl.panSpeed = 0.5;
-        // Debe orbitar con respecto al punto de mira de la cámara
-        this.cameraControl.target = look;
+        animacionCamara.start();
       }
     }
 
