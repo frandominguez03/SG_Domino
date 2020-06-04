@@ -306,18 +306,19 @@ class Domino extends THREE.Object3D
         
         // Coinciden parte superior (de la ficha a poner) con parte inferior de la ficha ya puesta
         else if(ficha.valorSup == this.casillas[resultado.y][resultado.z]) {
-            console.log(ficha.valorSup + " y " + this.casillas[resultado.y][resultado.z]);
+            console.log("Casuística 1");
+
             // El origen es la posición actual de la ficha
-            this.origen1 = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: Math.PI/2};
+            this.origen1 = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: -Math.PI/2};
             
             // El primer destino es para levantar y girar la ficha
-            this.destino1 = {y: 12.0, rotationX: -Math.PI/2, rotationY: Math.PI};
+            this.destino1 = {y: 12.0, rotationX: -Math.PI/2, rotationY: 0.0};
 
             var movimiento = new TWEEN.Tween(this.origen1).to(this.destino1, 1000)
             .easing(TWEEN.Easing.Quadratic.InOut)
                 .onUpdate(function() {
-                    ficha.rotation.x = -that.origen1.rotationX;
-                    ficha.rotation.y = that.origen1.rotationY;
+                    ficha.rotation.x = that.origen1.rotationX;
+                    ficha.rotation.y = -that.origen1.rotationY;
                     ficha.position.y = that.origen1.y;
                 });
 
@@ -345,8 +346,10 @@ class Domino extends THREE.Object3D
 
         // Coinciden parte superior (de la ficha a poner) con parte superior de la ficha ya puesta
         else if(ficha.valorSup == this.casillas[resultado.y][resultado.z+1]) {
+            console.log("Casuística 2");
+
             // El origen es la posición actual de la ficha
-            this.origen2 = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: Math.PI/2};
+            this.origen2 = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: -Math.PI/2};
             
             // El primer destino es para levantar y girar la ficha
             this.destino2 = {y: 12.0, rotationX: Math.PI/2, rotationY: 0.0};
@@ -383,7 +386,42 @@ class Domino extends THREE.Object3D
 
         // Coinciden parte inferior (de la ficha a poner) con parte inferior de la ficha ya puesta
         else if(ficha.valorInf == this.casillas[resultado.y][resultado.z]) {
-            console.log("Not implemented yet.");
+            console.log("Casuística 3");
+
+            // El origen es la posición actual de la ficha
+            this.origen3 = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: Math.PI/2};
+            
+            // El primer destino es para levantar y girar la ficha
+            this.destino3 = {y: 12.0, rotationX: -Math.PI/2, rotationY: Math.PI};
+
+            var movimiento = new TWEEN.Tween(this.origen3).to(this.destino3, 1000)
+            .easing(TWEEN.Easing.Quadratic.InOut)
+                .onUpdate(function() {
+                    ficha.rotation.x = -that.origen3.rotationX;
+                    ficha.rotation.y = that.origen3.rotationY;
+                    ficha.position.y = that.origen3.y;
+                });
+            
+            // Origen, igual que el destino anterior
+            this.origen33 = {x: ficha.position.x, y: 12.0, z: ficha.position.z, rotationY: Math.PI};
+
+            // Para el destino, llamamos a la función auxiliar
+            // que nos devolverá una tupla (x, z) a donde trasladaremos la ficha
+            var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+
+            // Destino, el tablero. Depende de dónde vayamos a colocar la ficha. De momento está hardcodeado.
+            this.destino33 = {x: tuplaDestino.x, y: 9.8, z: tuplaDestino.z, rotationY: 0.0};
+            
+            var movimiento2 = new TWEEN.Tween(this.origen33).to(this.destino33, 2500)
+                .easing(TWEEN.Easing.Quadratic.InOut)
+                .onUpdate(function() {
+                    ficha.position.x = that.origen33.x;
+                    ficha.position.y = that.origen33.y;
+                    ficha.position.z = that.origen33.z;
+                });
+            
+            movimiento.chain(movimiento2);
+            movimiento.start();
         }
 
         // Coinciden parte inferior (de la ficha a poner) con parte superior de la ficha ya puesta
