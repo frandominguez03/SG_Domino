@@ -224,12 +224,69 @@ class MyScene extends THREE.Scene {
 
     if(x == 80 || x == 112)
     {
-      this.juego.cambioDeTurno();
-      console.log("Se ha cambiado de turno");
+      this.cambioDeTurno();
     }
     
     this.iniciado = true;
   }
+
+  /**
+   * @description Funcion que se encarga de pasar el turno y realizar la animación de cámara necesaria
+   */
+  cambioDeTurno()
+  {
+    console.log("Se ha cambiado de turno");
+    this.juego.cambioDeTurno();
+    var that = this;
+
+    var origen;
+    var mitad;
+    var destino;
+
+
+    if(this.juego.jugador_actual == 0)
+    {
+      origen = {x: 20, y: 15, z: 0};
+      mitad = {x: 0, y: 15, z: 20};
+      destino = {x: -20, y: 15, z: 0};
+    }
+    else
+    {
+      origen = {x: -20, y: 15, z: 0};
+      mitad = {x: 0, y: 15, z: -20};
+      destino = {x: 20, y: 15, z: 0};
+    }
+
+
+
+    var animacionCambioTurno_1 = new TWEEN.Tween(origen)
+      .to(mitad, 2000)
+      .easing(TWEEN.Easing.Quadratic.InOut)
+      .onUpdate(function() {
+        that.camera.position.set(origen.x, origen.y, origen.z);
+        // Cambiamos a dónde mira
+        var look = new THREE.Vector3 (0,13,0);
+        that.camera.lookAt(look);
+      });
+
+      var animacionCambioTurno_2 = new TWEEN.Tween(mitad)
+      .to(destino, 2000)
+      .easing(TWEEN.Easing.Quadratic.InOut)
+      .onUpdate(function() {
+        that.camera.position.set(mitad.x, mitad.y, mitad.z);
+        // Cambiamos a dónde mira
+        var look = new THREE.Vector3 (0,13,0);
+        that.camera.lookAt(look);
+      });
+
+
+
+      animacionCambioTurno_1.chain(animacionCambioTurno_2);
+      animacionCambioTurno_1.start();
+
+  }
+
+
 }
 
 
