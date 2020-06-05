@@ -263,173 +263,129 @@ class Domino extends THREE.Object3D
     situarFichaEnTablero(ficha, resultado)
     {
         var that = this;
-        
-        // Primera ficha. La colocamos directamente.
-        if(resultado.y == 10 && resultado.z == 10) {
-            // El origen es la posición actual de la ficha
-            this.origen0 = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: Math.PI/2};
-            
-            // El primer destino es para levantar y girar la ficha
-            this.destino0 = {y: 12.0, rotationX: Math.PI/2, rotationY: 0.0};
 
-            var movimiento = new TWEEN.Tween(this.origen0).to(this.destino0, 1000)
+        // Hacemos la primera animación. Igual para todas las fichas. Levantamos la ficha y se pone horizontal.
+        this.origen0 = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: Math.PI/2, rotationZ: 0.0};
+
+        // El primer destino es para levantar y girar la ficha
+        this.destino0 = {y: 12.0, rotationX: Math.PI/2, rotationY: 0.0, rotationZ: Math.PI/2};
+
+        var movimiento1 = new TWEEN.Tween(this.origen0).to(this.destino0, 1000)
             .easing(TWEEN.Easing.Quadratic.InOut)
-                .onUpdate(function() {
-                    ficha.rotation.x = -that.origen0.rotationX;
-                    ficha.rotation.y = that.origen0.rotationY;
-                    ficha.position.y = that.origen0.y;
-                });
-            
-            // Origen, igual que el destino anterior
-            this.origen00 = {x: ficha.position.x, y: 12.0, z: ficha.position.z, rotationY: Math.PI};
-
-            // Para el destino, llamamos a la función auxiliar
-            // que nos devolverá una tupla (x, z) a donde trasladaremos la ficha
+            .onUpdate(function() {
+                ficha.rotation.y = that.origen0.rotationY;
+                ficha.rotation.x = -that.origen0.rotationX;
+                ficha.rotation.z = that.origen0.rotationZ;
+                ficha.position.y = that.origen0.y;
+            });
+        
+        // Ahora comprobamos si tenemos que trasladar la ficha a la derecha o a la izquierda, antes de ponerla
+        // El origen es desde donde hemos levantado la ficha
+        this.origen1 = {x: ficha.position.x, y: 12.0, z: ficha.position.z, rotationZ: Math.PI/2};
+        
+        // Es la primera ficha. La ponemos en el centro directamente
+        if(resultado.x == -1) {
             var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+            this.destinoFinal = {x: tuplaDestino.x, y: 9.8, z: tuplaDestino.z, rotationZ: 0.0}
 
-            // Destino, el tablero. Depende de dónde vayamos a colocar la ficha. De momento está hardcodeado.
-            this.destino00 = {x: tuplaDestino.x, y: 9.8, z: tuplaDestino.z, rotationY: 0.0};
-            
-            var movimiento2 = new TWEEN.Tween(this.origen00).to(this.destino00, 2500)
+            var movimientoTablero = new TWEEN.Tween(this.origen1).to(this.destinoFinal, 2000)
                 .easing(TWEEN.Easing.Quadratic.InOut)
                 .onUpdate(function() {
-                    ficha.position.x = that.origen00.x;
-                    ficha.position.y = that.origen00.y;
-                    ficha.position.z = that.origen00.z;
-                });
-            
-            movimiento.chain(movimiento2);
-            movimiento.start();
-        }
-        
-        // Coinciden parte superior (de la ficha a poner) con parte inferior de la ficha ya puesta
-        else if(ficha.valorSup == this.casillas[resultado.y][resultado.z]) {
-            console.log("Casuística 1");
-
-            // El origen es la posición actual de la ficha
-            this.origen1 = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: -Math.PI/2};
-            
-            // El primer destino es para levantar y girar la ficha
-            this.destino1 = {y: 12.0, rotationX: -Math.PI/2, rotationY: 0.0};
-
-            var movimiento = new TWEEN.Tween(this.origen1).to(this.destino1, 1000)
-            .easing(TWEEN.Easing.Quadratic.InOut)
-                .onUpdate(function() {
-                    ficha.rotation.x = that.origen1.rotationX;
-                    ficha.rotation.y = -that.origen1.rotationY;
+                    ficha.position.x = that.origen1.x;
                     ficha.position.y = that.origen1.y;
-                });
-
-            // Origen, igual que el destino anterior
-            this.origen11 = {x: ficha.position.x, y: 12.0, z: ficha.position.z, rotationY: Math.PI};
-
-            // Para el destino, llamamos a la función auxiliar
-            // que nos devolverá una tupla (x, z) a donde trasladaremos la ficha
-            var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
-
-            // Destino, el tablero. Depende de dónde vayamos a colocar la ficha. De momento está hardcodeado.
-            this.destino11 = {x: tuplaDestino.x, y: 9.8, z: tuplaDestino.z, rotationY: 0.0};
-            
-            var movimiento2 = new TWEEN.Tween(this.origen11).to(this.destino11, 2500)
-                .easing(TWEEN.Easing.Quadratic.InOut)
-                .onUpdate(function() {
-                    ficha.position.x = that.origen11.x;
-                    ficha.position.y = that.origen11.y;
-                    ficha.position.z = that.origen11.z;
+                    ficha.position.z = that.origen1.z;
+                    ficha.rotation.z = that.origen1.rotationZ;
                 });
             
-            movimiento.chain(movimiento2);
-            movimiento.start();
+            movimiento1.chain(movimientoTablero);
+            movimiento1.start();
         }
 
-        // Coinciden parte superior (de la ficha a poner) con parte superior de la ficha ya puesta
-        else if(ficha.valorSup == this.casillas[resultado.y][resultado.z+1]) {
-            console.log("Casuística 2");
+        // Si no es la primera ficha, gestionamos todas las casuísticas
+        else {
+            // ¿Nos movemos a la derecha?
+            if(resultado.z > 10 && resultado.z < 15) {
+                var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+                this.destinoFinal = {x: tuplaDestino.x, z: tuplaDestino.z};
 
-            // El origen es la posición actual de la ficha
-            this.origen2 = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: -Math.PI/2};
-            
-            // El primer destino es para levantar y girar la ficha
-            this.destino2 = {y: 12.0, rotationX: Math.PI/2, rotationY: 0.0};
+                var movimiento2 = new TWEEN.Tween(this.origen1).to(this.destinoFinal, 2000)
+                    .easing(TWEEN.Easing.Quadratic.InOut)
+                    .onUpdate(function() {
+                        ficha.position.x = that.origen1.x;
+                        ficha.position.z = that.origen1.z;
+                    });
+                
+                // ¿Qué parte de la ficha coincide?
+                if(resultado.x == ficha.valorSup) {
+                    this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
+                    this.destinoBajada = {y: 9.8, rotationZ: Math.PI};
 
-            var movimiento = new TWEEN.Tween(this.origen2).to(this.destino2, 1000)
-            .easing(TWEEN.Easing.Quadratic.InOut)
-                .onUpdate(function() {
-                    ficha.rotation.x = -that.origen2.rotationX;
-                    ficha.rotation.y = -that.origen2.rotationY;
-                    ficha.position.y = that.origen2.y;
-                });
-            
-            // Origen, igual que el destino anterior
-            this.origen22 = {x: ficha.position.x, y: 12.0, z: ficha.position.z, rotationY: Math.PI};
+                    var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                        .easing(TWEEN.Easing.Quadratic.InOut)
+                        .onUpdate(function() {
+                            ficha.rotation.z = that.destinoBajada.rotationZ;
+                            ficha.position.y = that.origenBajada.y;
+                        });
+                }
 
-            // Para el destino, llamamos a la función auxiliar
-            // que nos devolverá una tupla (x, z) a donde trasladaremos la ficha
-            var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+                else if(resultado.x == ficha.valorInf) {
+                    this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
+                    this.destinoBajada = {y: 9.8, rotationZ: 0.0};
 
-            // Destino, el tablero. Depende de dónde vayamos a colocar la ficha. De momento está hardcodeado.
-            this.destino22 = {x: tuplaDestino.x, y: 9.8, z: tuplaDestino.z, rotationY: 0.0};
-            
-            var movimiento2 = new TWEEN.Tween(this.origen22).to(this.destino22, 2500)
-                .easing(TWEEN.Easing.Quadratic.InOut)
-                .onUpdate(function() {
-                    ficha.position.x = that.origen22.x;
-                    ficha.position.y = that.origen22.y;
-                    ficha.position.z = that.origen22.z;
-                });
-            
-            movimiento.chain(movimiento2);
-            movimiento.start();
-        }
+                    var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                        .easing(TWEEN.Easing.Quadratic.InOut)
+                        .onUpdate(function() {
+                            ficha.rotation.z = that.destinoBajada.rotationZ;
+                            ficha.position.y = that.origenBajada.y;
+                        });
+                }
 
-        // Coinciden parte inferior (de la ficha a poner) con parte inferior de la ficha ya puesta
-        else if(ficha.valorInf == this.casillas[resultado.y][resultado.z]) {
-            console.log("Casuística 3");
+                movimiento1.chain(movimiento2);
+                movimiento2.chain(movimientoBajada);
+                movimiento1.start();
+            }
 
-            // El origen es la posición actual de la ficha
-            this.origen3 = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: Math.PI/2};
-            
-            // El primer destino es para levantar y girar la ficha
-            this.destino3 = {y: 12.0, rotationX: -Math.PI/2, rotationY: Math.PI};
+            // ¿Nos movemos a la izquierda?
+            else if(resultado.z > 5 && resultado.z < 10) {
+                var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+                this.destinoFinal = {x: tuplaDestino.x, z: tuplaDestino.z};
 
-            var movimiento = new TWEEN.Tween(this.origen3).to(this.destino3, 1000)
-            .easing(TWEEN.Easing.Quadratic.InOut)
-                .onUpdate(function() {
-                    ficha.rotation.x = -that.origen3.rotationX;
-                    ficha.rotation.y = that.origen3.rotationY;
-                    ficha.position.y = that.origen3.y;
-                });
-            
-            // Origen, igual que el destino anterior
-            this.origen33 = {x: ficha.position.x, y: 12.0, z: ficha.position.z, rotationY: Math.PI};
+                var movimiento2 = new TWEEN.Tween(this.origen1).to(this.destinoFinal, 2000)
+                    .easing(TWEEN.Easing.Quadratic.InOut)
+                    .onUpdate(function() {
+                        ficha.position.x = that.origen1.x;
+                        ficha.position.z = that.origen1.z;
+                    });
+                
+                // ¿Qué parte de la ficha coincide?
+                if(resultado.x == ficha.valorSup) {
+                    this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
+                    this.destinoBajada = {y: 9.8, rotationZ: 0.0};
 
-            // Para el destino, llamamos a la función auxiliar
-            // que nos devolverá una tupla (x, z) a donde trasladaremos la ficha
-            var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+                    var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                        .easing(TWEEN.Easing.Quadratic.InOut)
+                        .onUpdate(function() {
+                            ficha.rotation.z = that.destinoBajada.rotationZ;
+                            ficha.position.y = that.origenBajada.y;
+                        });
+                }
 
-            // Destino, el tablero. Depende de dónde vayamos a colocar la ficha. De momento está hardcodeado.
-            this.destino33 = {x: tuplaDestino.x, y: 9.8, z: tuplaDestino.z, rotationY: 0.0};
-            
-            var movimiento2 = new TWEEN.Tween(this.origen33).to(this.destino33, 2500)
-                .easing(TWEEN.Easing.Quadratic.InOut)
-                .onUpdate(function() {
-                    ficha.position.x = that.origen33.x;
-                    ficha.position.y = that.origen33.y;
-                    ficha.position.z = that.origen33.z;
-                });
-            
-            movimiento.chain(movimiento2);
-            movimiento.start();
-        }
+                else if(resultado.x == ficha.valorInf) {
+                    this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
+                    this.destinoBajada = {y: 9.8, rotationZ: Math.PI};
 
-        // Coinciden parte inferior (de la ficha a poner) con parte superior de la ficha ya puesta
-        else if(ficha.valorInf == this.casillas[resultado.y][resultado.z+1]) {
-            console.log("Not implemented yet.");
-        }
+                    var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                        .easing(TWEEN.Easing.Quadratic.InOut)
+                        .onUpdate(function() {
+                            ficha.rotation.z = that.destinoBajada.rotationZ;
+                            ficha.position.y = that.origenBajada.y;
+                        });
+                }
 
-        // Si es una ficha doble, la tenemos que poner en horizontal
-        else if(ficha.valorSup == ficha.valorInf) {
-            console.log("Not implemented yet.");
+                movimiento1.chain(movimiento2);
+                movimiento2.chain(movimientoBajada);
+                movimiento1.start();
+            }
         }
 
         return true;
