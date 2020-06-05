@@ -180,18 +180,16 @@ class MyScene extends THREE.Scene {
 
     var raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(mouse,this.camera);
-    console.log("El jugador actual es:");
-    console.log(this.juego.jugador_actual);
-    console.log("Las fichas seleccionables son las del jugador: ")
-    console.log(this.juego.getFichasSeleccionables());
+
     var pickedObjects = raycaster.intersectObjects(this.juego.getFichasSeleccionables(),true);
+    var that = this;
     if(pickedObjects.length > 0)
     {
-      console.log("Se ha pickeado :");
       console.log(pickedObjects[0].object.userData);
       this.juego.jugarFicha(pickedObjects[0].object.userData);
-      this.cambioDeTurno();
-      
+      //Esperamos a que se termine la animación
+      setTimeout(() => {  this.cambioDeTurno(); }, 4000);
+
     }
   }
 
