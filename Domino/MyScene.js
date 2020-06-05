@@ -180,15 +180,17 @@ class MyScene extends THREE.Scene {
 
     var raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(mouse,this.camera);
-
+    console.log("El jugador actual es:");
+    console.log(this.juego.jugador_actual);
+    console.log("Las fichas seleccionables son las del jugador: ")
+    console.log(this.juego.getFichasSeleccionables());
     var pickedObjects = raycaster.intersectObjects(this.juego.getFichasSeleccionables(),true);
     if(pickedObjects.length > 0)
     {
       console.log("Se ha pickeado :");
       console.log(pickedObjects[0].object.userData);
       this.juego.jugarFicha(pickedObjects[0].object.userData);
-
-      // Animación para cambiar la cámara, al cambiar el turno
+      this.cambioDeTurno();
       
     }
   }
@@ -236,7 +238,7 @@ class MyScene extends THREE.Scene {
   cambioDeTurno()
   {
     console.log("Se ha cambiado de turno");
-    this.juego.cambioDeTurno();
+    
     var that = this;
 
     var origen;
@@ -283,6 +285,8 @@ class MyScene extends THREE.Scene {
 
       animacionCambioTurno_1.chain(animacionCambioTurno_2);
       animacionCambioTurno_1.start();
+
+      this.juego.cambioDeTurno();
 
   }
 

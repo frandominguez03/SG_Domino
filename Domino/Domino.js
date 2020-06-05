@@ -117,6 +117,8 @@ class Domino extends THREE.Object3D
     cambioDeTurno()
     {
         this.jugador_actual =  (this.jugador_actual + 1) % 2;
+        console.log("Se ha cambiado de turno el jugador actual es:");
+        console.log(this.jugador_actual);
     }
 
     /**
@@ -246,10 +248,6 @@ class Domino extends THREE.Object3D
             this.jugadores[this.jugador_actual].jugarFicha(f);
             this.situarFichaEnTablero(f, resultado);
 
-            console.log(this.casillas);
-            //console.log(this.jugadores[this.jugador_actual].fichas)
-            console.log(this.casillasDisponibles);
-            //Aquí iría cambio de turno
             return true;
         }
         else
