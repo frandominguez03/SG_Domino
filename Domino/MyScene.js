@@ -226,6 +226,11 @@ class MyScene extends THREE.Scene {
     {
       this.cambioDeTurno();
     }
+
+    if(x == 88 || x == 120)
+    {
+      this.vistaDesdeArriba();
+    }
     
     this.iniciado = true;
   }
@@ -235,7 +240,6 @@ class MyScene extends THREE.Scene {
    */
   cambioDeTurno()
   {
-    console.log("Se ha cambiado de turno");
     
     var that = this;
 
@@ -285,6 +289,65 @@ class MyScene extends THREE.Scene {
       animacionCambioTurno_1.start();
 
       this.juego.cambioDeTurno();
+
+  }
+
+  /**
+   * @description Animacion para proporcionar una vista del tablero desde arriba
+   */
+  vistaDesdeArriba()
+  {
+    var that = this;
+
+    var origen;
+    var destino;
+
+    console.log(this.camera.position.x);
+    if(this.camera.position.x == 20 || this.camera.position.x == -20)
+    {
+      origen = {x: this.camera.position.x, y: 15, z: 0};
+      destino = {x: 0, y: 40, z: 0};
+    }
+    else
+    {
+      if(this.camera.position.y == 40)
+      {
+        origen = {x: 0, y: 40, z: 0};
+        if(this.juego.jugador_actual == 0)
+        {
+          destino = {x: 20, y: 15, z: 0};
+        }
+        else
+        {
+          destino = {x: -20, y: 15, z: 0};
+        }
+      }
+    }
+
+    var animacionVistaPajaro = new TWEEN.Tween(origen)
+      .to(destino, 2000)
+      .easing(TWEEN.Easing.Quadratic.InOut)
+      .onUpdate(function() {
+        that.camera.position.set(origen.x, origen.y, origen.z);
+        // Cambiamos a dónde mira
+        var look = new THREE.Vector3 (0,13,0);
+        that.camera.lookAt(look);
+      });
+
+    //   var animacionCambioTurno_2 = new TWEEN.Tween(mitad)
+    //   .to(destino, 2000)
+    //   .easing(TWEEN.Easing.Quadratic.InOut)
+    //   .onUpdate(function() {
+    //     that.camera.position.set(mitad.x, mitad.y, mitad.z);
+    //     // Cambiamos a dónde mira
+    //     var look = new THREE.Vector3 (0,13,0);
+    //     that.camera.lookAt(look);
+    //   });
+
+
+
+    //   animacionCambioTurno_1.chain(animacionCambioTurno_2);
+    animacionVistaPajaro.start();
 
   }
 
