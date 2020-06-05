@@ -81,7 +81,7 @@ class MyScene extends THREE.Scene {
     // La luz ambiental solo tiene un color y una intensidad
     // Se declara como   var   y va a ser una variable local a este método
     //    se hace así puesto que no va a ser accedida desde otros métodos
-    var ambientLight = new THREE.AmbientLight(0xccddee, 0.35);
+    var ambientLight = new THREE.AmbientLight(0xccddee, 0.5);
     // La añadimos a la escena
     this.add (ambientLight);
     
@@ -89,9 +89,21 @@ class MyScene extends THREE.Scene {
     // La luz focal, además tiene una posición, y un punto de mira
     // Si no se le da punto de mira, apuntará al (0,0,0) en coordenadas del mundo
     // En este caso se declara como   this.atributo   para que sea un atributo accesible desde otros métodos.
-    this.spotLight = new THREE.SpotLight( 0xffffff, this.guiControls.lightIntensity );
-    this.spotLight.position.set( 0, 30, 0 );
-    this.add (this.spotLight);
+    this.luz1 = new THREE.SpotLight( 0xffffff, 0.5 );
+    this.luz1.position.set( 0, 25, -50 );
+    this.add (this.luz1);
+
+    this.luz2 = new THREE.SpotLight( 0xffffff, 0.5 );
+    this.luz2.position.set( 0, 25, 50 );
+    this.add (this.luz2);
+
+    this.luz3 = new THREE.SpotLight( 0xffffff, 0.5 );
+    this.luz3.position.set( 50, 25, 0 );
+    this.add (this.luz3);
+
+    this.luz4 = new THREE.SpotLight( 0xffffff, 0.5 );
+    this.luz4.position.set( -50, 25, 0 );
+    this.add (this.luz4);
   }
   
   createRenderer (myCanvas) {
@@ -147,7 +159,7 @@ class MyScene extends THREE.Scene {
 
     // Se actualizan los elementos de la escena para cada frame
     // Se actualiza la intensidad de la luz con lo que haya indicado el usuario en la gui
-    this.spotLight.intensity = this.guiControls.lightIntensity;
+    this.luz1.intensity = this.guiControls.lightIntensity;
 
     // Actualizamos el juego
     this.juego.update();
