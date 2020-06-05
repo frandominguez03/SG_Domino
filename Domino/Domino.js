@@ -117,8 +117,6 @@ class Domino extends THREE.Object3D
     cambioDeTurno()
     {
         this.jugador_actual =  (this.jugador_actual + 1) % 2;
-        console.log("Se ha cambiado de turno el jugador actual es:");
-        console.log(this.jugador_actual);
     }
 
     /**
@@ -128,9 +126,6 @@ class Domino extends THREE.Object3D
      */
     jugarFicha(f)
     {
-        console.log("Jugando la ficha")
-        console.log(f.valorSup);
-        console.log(f.valorInf);
         var resultado = this.comprobarFicha(f);
 
         if(resultado != false)
@@ -242,12 +237,11 @@ class Domino extends THREE.Object3D
                 this.casillas[resultado.y][resultado.z+1] = f.valorSup;
                 this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y,resultado.z+2));
                 this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y,resultado.z-1));
-                console.log(this.casillasDisponibles);
             }
 
             this.jugadores[this.jugador_actual].jugarFicha(f);
             this.situarFichaEnTablero(f, resultado);
-
+            console.log(this.casillas);
             return true;
         }
         else
@@ -406,13 +400,14 @@ class Domino extends THREE.Object3D
         var difFila = 10-fila;
         var difCol = 10-columna;
 
-        console.log(difCol);
 
         if(difCol < 0){
             difCol = (difCol*1.5)/2;
         }
 
         else {
+            if(difCol == 3)
+                difCol = 2;
             difCol = difCol*1.5;
         }
 
