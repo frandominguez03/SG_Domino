@@ -72,4 +72,19 @@ class Jugador
         var pos = this.fichas.indexOf(f);
         this.fichas.splice(pos,1);
     }
+
+    /**
+     * @description Devuelve los puntos que tienen las fichas de un usuario
+     */
+    calcularPuntos()
+    {
+        var acumulacion = 0;
+        for(var i=0; i < this.fichas.length; i++ )
+        {
+            acumulacion += this.fichas[i].valorSup;
+            acumulacion += this.fichas[i].valorInf;
+        }
+
+        return acumulacion;
+    }
 }

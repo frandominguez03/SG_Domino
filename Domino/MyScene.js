@@ -188,7 +188,15 @@ class MyScene extends THREE.Scene {
       console.log(pickedObjects[0].object.userData);
       this.juego.jugarFicha(pickedObjects[0].object.userData);
       //Esperamos a que se termine la animación
-      setTimeout(() => {  this.cambioDeTurno(); }, 4000);
+      var estado = this.juego.consultarEstadoJuego()
+      if(estado)
+        setTimeout(() => {  this.cambioDeTurno(); }, 4000);
+      else
+      {
+        console.log("Hay un ganador");
+        console.log(estado);
+      } 
+        
 
     }
   }

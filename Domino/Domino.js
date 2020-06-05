@@ -11,6 +11,8 @@ class Domino extends THREE.Object3D
         this.geometriasMitades = new Mitad();
         this.caja = [];
 
+        this.estadoJuego = true; //true iniciado false terminado
+
         //Matriz que controlará la posición de las fichas
         this.TAM_MAX_CASILLAS = 20;
         this.casillas = new Array(this.TAM_MAX_CASILLAS);
@@ -437,9 +439,11 @@ class Domino extends THREE.Object3D
     /**
      * @description El método update
      */
-    update() {
+    update()
+    {
         TWEEN.update();
     }
+
     /**
      * @description Devuelve una lista con las fichas seleccionables en cada momento
      * Las fichas seleccionables en cada momento serán las que tenga el jugador actual en su turno
@@ -447,6 +451,65 @@ class Domino extends THREE.Object3D
     getFichasSeleccionables()
     {
         return this.jugadores[this.jugador_actual].fichas;
+    }
+
+    /**
+     * @description Comprueba que el juego sigue o si en su defecto hay un ganador
+     * @returns False si no hay ganador, el id del jugador que gana en caso de que si lo haya | Devuelve 3 en caso de empate
+     */
+    consultarEstadoJuego()
+    {
+        if(this.jugadores[0].fichas.length == 0)
+            return 0;
+
+        if(this.jugadores[1].fichas.length == 0)
+            return 1;
+            
+        var J_1_opciones = false;
+        for(var i = 0; i < this.jugadores[0].fichas.length && !J_1_opciones; i++)
+        {
+            var aux = false;
+            for(var j = 0; j < this.casillasDisponibles.length && !aux; j++)
+            {
+                if(this.jugadores[0].fichas[i].valorSup == this.casillasDisponibles[j].valorSup || this.jugadores[0].fichas[i].valorSup == this.casillasDisponibles[j].valorInf || this.jugadores[0].fichas[i].valorInf == this.casillasDisponibles[j].valorSup || this.jugadores[0].fichas[i].valorInf == this.casillasDisponibles[j].valorInf )
+                {
+                    aux = true;
+                    J_1_opciones = true;
+                }
+            }
+        }
+
+
+        var J_2_opciones = false;
+        for(var i = 0; i < this.jugadores[1].fichas.length && !J_2_opciones; i++)
+        {
+            var aux = false;
+            for(var j = 0; j < this.casillasDisponibles.length && !aux; j++)
+            {
+                if(this.jugadores[1].fichas[i].valorSup == this.casillasDisponibles[j].valorSup || this.jugadores[1].fichas[i].valorSup == this.casillasDisponibles[j].valorInf || this.jugadores[1].fichas[i].valorInf == this.casillasDisponibles[j].valorSup || this.jugadores[1].fichas[i].valorInf == this.casillasDisponibles[j].valorInf )
+                {
+                    aux = true;
+                    J_2_opciones = true;
+                }
+            }
+        }
+
+        if(!J_1_opciones && !J_2_opciones )
+        {
+            var puntosJ1 = this.jugadores[0].calcularPuntos();
+            var puntosJ2 = this.jugadores[1].calcularPuntos();
+
+            if(puntosJ1 > puntosJ2)
+                return 0;
+            else if (puntosJ1 < puntosJ2)
+                return 1;
+            else if (puntosJ1 == puntosJ2)
+                return 3;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
 
