@@ -303,11 +303,18 @@ class MyScene extends THREE.Scene {
     var destino;
 
     console.log(this.camera.position.x);
-    if(this.camera.position.x == 20 || this.camera.position.x == -20)
+    if(this.camera.position.x == 20)
     {
       origen = {x: this.camera.position.x, y: 15, z: 0};
-      destino = {x: 0, y: 40, z: 0};
+      destino = {x: 1, y: 40, z: 0};
     }
+
+    else if(this.camera.position.x == -20)
+    {
+      origen = {x: this.camera.position.x, y: 15, z: 0};
+      destino = {x: -1, y: 40, z: 0};
+    }
+
     else
     {
       if(this.camera.position.y == 40)
