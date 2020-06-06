@@ -330,7 +330,6 @@ class Domino extends THREE.Object3D
             if(resultado.z > 10 && resultado.z <= 16) {
                 // Ponemos la ficha en vertical
                 if(resultado.z == 16) {
-                    console.log("Llega");
                     var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
                     this.destinoFinal = {x: tuplaDestino.x+0.5, z: tuplaDestino.z+0.5};
 
@@ -342,34 +341,62 @@ class Domino extends THREE.Object3D
                         });
                     
                     // ¿Qué parte de la ficha coincide?
-                    if(resultado.x == ficha.valorSup) {
-                        this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
-                        this.destinoBajada = {y: 9.8, rotationZ: 2*Math.PI};
-
-                        var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
-                            .easing(TWEEN.Easing.Quadratic.InOut)
-                            .onUpdate(function() {
-                                ficha.rotation.z = that.destinoBajada.rotationZ;
-                                ficha.position.y = that.origenBajada.y;
-                            });
+                    if(this.jugador_actual == 0) {
+                        if(resultado.x == ficha.valorSup) {
+                            this.origenBajada = {y: 12.0}
+                            this.destinoBajada = {y: 9.8};
+    
+                            var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                                .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onUpdate(function() {
+                                    ficha.position.y = that.origenBajada.y;
+                                });
+                        }
+    
+                        else if(resultado.x == ficha.valorInf) {
+                            this.origenBajada = {y: 12.0, rotation: Math.PI/2};
+                            this.destinoBajada = {y: 9.8, rotation: 3*Math.PI/2};
+    
+                            var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                                .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onUpdate(function() {
+                                    ficha.rotation.z = that.origenBajada.rotation;
+                                    ficha.position.y = that.origenBajada.y;
+                                });
+                        }
                     }
 
-                    else if(resultado.x == ficha.valorInf) {
-                        this.origenBajada = {y: 12.0}
-                        this.destinoBajada = {y: 9.8};
-
-                        var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
-                            .easing(TWEEN.Easing.Quadratic.InOut)
-                            .onUpdate(function() {
-                                ficha.position.y = that.origenBajada.y;
-                            });
+                    else if(this.jugador_actual == 1) {
+                        if(resultado.x == ficha.valorSup) {
+                            this.origenBajada = {y: 12.0, rotation: Math.PI/2}
+                            this.destinoBajada = {y: 9.8, rotation: 3*Math.PI/2};
+    
+                            var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                                .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onUpdate(function() {
+                                    ficha.rotation.z = that.origenBajada.rotation;
+                                    ficha.position.y = that.origenBajada.y;
+                                });
+                        }
+    
+                        else if(resultado.x == ficha.valorInf) {
+                            this.origenBajada = {y: 12.0};
+                            this.destinoBajada = {y: 9.8};
+    
+                            var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                                .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onUpdate(function() {
+                                    ficha.position.y = that.origenBajada.y;
+                                });
+                        }
                     }
 
                     movimiento1.chain(movimiento2);
                     movimiento2.chain(movimientoBajada);
                     movimiento1.start();
                 }
-
+                
+                // En horizontal sin más
                 else {
                     var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
                     this.destinoFinal = {x: tuplaDestino.x, z: tuplaDestino.z};
@@ -414,44 +441,115 @@ class Domino extends THREE.Object3D
 
             // ¿Nos movemos a la izquierda?
             else if(resultado.z >= 5 && resultado.z < 10) {
-                var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
-                this.destinoFinal = {x: tuplaDestino.x, z: tuplaDestino.z};
+                // Ponemos la ficha en vertical
+                if(resultado.z == 5) {
+                    var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+                    this.destinoFinal = {x: tuplaDestino.x+0.5, z: tuplaDestino.z-3.5};
 
-                var movimiento2 = new TWEEN.Tween(this.origen1).to(this.destinoFinal, 2000)
-                    .easing(TWEEN.Easing.Quadratic.InOut)
-                    .onUpdate(function() {
-                        ficha.position.x = that.origen1.x;
-                        ficha.position.z = that.origen1.z;
-                    });
-                
-                // ¿Qué parte de la ficha coincide?
-                if(resultado.x == ficha.valorSup) {
-                    this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
-                    this.destinoBajada = {y: 9.8, rotationZ: 0.0};
-
-                    var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                    var movimiento2 = new TWEEN.Tween(this.origen1).to(this.destinoFinal, 2000)
                         .easing(TWEEN.Easing.Quadratic.InOut)
                         .onUpdate(function() {
-                            ficha.rotation.z = that.destinoBajada.rotationZ;
-                            ficha.position.y = that.origenBajada.y;
+                            ficha.position.x = that.origen1.x;
+                            ficha.position.z = that.origen1.z;
                         });
+                    
+                    // ¿Qué parte de la ficha coincide?
+                    if(this.jugador_actual == 0) {
+                        if(resultado.x == ficha.valorSup) {
+                            this.origenBajada = {y: 12.0, rotation: Math.PI/2}
+                            this.destinoBajada = {y: 9.8, rotation: 3*Math.PI/2};
+    
+                            var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                                .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onUpdate(function() {
+                                    ficha.rotation.z = that.origenBajada.rotation;
+                                    ficha.position.y = that.origenBajada.y;
+                                });
+                        }
+    
+                        else if(resultado.x == ficha.valorInf) {
+                            this.origenBajada = {y: 12.0}
+                            this.destinoBajada = {y: 9.8};
+    
+                            var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                                .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onUpdate(function() {
+                                    ficha.position.y = that.origenBajada.y;
+                                });
+                        }
+                    }
+
+                    else if(this.jugador_actual == 1) {
+                        if(resultado.x == ficha.valorSup) {
+                            this.origenBajada = {y: 12.0, rotation: Math.PI/2}
+                            this.destinoBajada = {y: 9.8, rotation: 3*Math.PI/2};
+    
+                            var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                                .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onUpdate(function() {
+                                    ficha.rotation.z = that.origenBajada.rotation;
+                                    ficha.position.y = that.origenBajada.y;
+                                });
+                        }
+    
+                        else if(resultado.x == ficha.valorInf) {
+                            this.origenBajada = {y: 12.0}
+                            this.destinoBajada = {y: 9.8};
+    
+                            var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                                .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onUpdate(function() {
+                                    ficha.position.y = that.origenBajada.y;
+                                });
+                        }
+                    }
+
+                    movimiento1.chain(movimiento2);
+                    movimiento2.chain(movimientoBajada);
+                    movimiento1.start();
                 }
 
-                else if(resultado.x == ficha.valorInf) {
-                    this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
-                    this.destinoBajada = {y: 9.8, rotationZ: Math.PI};
+                // EN horizontal sin más
+                else {
+                    var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+                    this.destinoFinal = {x: tuplaDestino.x, z: tuplaDestino.z};
 
-                    var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                    var movimiento2 = new TWEEN.Tween(this.origen1).to(this.destinoFinal, 2000)
                         .easing(TWEEN.Easing.Quadratic.InOut)
                         .onUpdate(function() {
-                            ficha.rotation.z = that.destinoBajada.rotationZ;
-                            ficha.position.y = that.origenBajada.y;
+                            ficha.position.x = that.origen1.x;
+                            ficha.position.z = that.origen1.z;
                         });
-                }
+                    
+                    // ¿Qué parte de la ficha coincide?
+                    if(resultado.x == ficha.valorSup) {
+                        this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
+                        this.destinoBajada = {y: 9.8, rotationZ: 0.0};
 
-                movimiento1.chain(movimiento2);
-                movimiento2.chain(movimientoBajada);
-                movimiento1.start();
+                        var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                            .easing(TWEEN.Easing.Quadratic.InOut)
+                            .onUpdate(function() {
+                                ficha.rotation.z = that.destinoBajada.rotationZ;
+                                ficha.position.y = that.origenBajada.y;
+                            });
+                    }
+
+                    else if(resultado.x == ficha.valorInf) {
+                        this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
+                        this.destinoBajada = {y: 9.8, rotationZ: Math.PI};
+
+                        var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                            .easing(TWEEN.Easing.Quadratic.InOut)
+                            .onUpdate(function() {
+                                ficha.rotation.z = that.destinoBajada.rotationZ;
+                                ficha.position.y = that.origenBajada.y;
+                            });
+                    }
+
+                    movimiento1.chain(movimiento2);
+                    movimiento2.chain(movimientoBajada);
+                    movimiento1.start();
+                }
             }
         }
 
