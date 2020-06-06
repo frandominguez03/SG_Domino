@@ -42,7 +42,7 @@ class Jugador
                 this.fichas[i].rotation.y = Math.PI/2
                 this.fichas[i].position.y = 10.3;
                 this.fichas[i].position.z = posZ;
-                this.fichas[i].position.x = 5.5;
+                this.fichas[i].position.x = 9.5;
                 
                 posZ -= 1
             }
@@ -56,7 +56,7 @@ class Jugador
                 this.fichas[i].rotation.y = -Math.PI/2
                 this.fichas[i].position.y = 10.3;
                 this.fichas[i].position.z = posZ;
-                this.fichas[i].position.x = -5.5;
+                this.fichas[i].position.x = -9.5;
                 
                 posZ -= 1
             }

@@ -23,10 +23,10 @@ class MyScene extends THREE.Scene {
 
     // Añadimos ambas sillas
     this.silla1 = new Silla();
-    this.silla1.position.set(15, 0, 0);
+    this.silla1.position.set(17, 0, 0);
     this.silla1.rotation.y = -Math.PI/2;
     this.silla2 = new Silla();
-    this.silla2.position.set(-15, 0, 0);
+    this.silla2.position.set(-17, 0, 0);
     this.silla2.rotation.y = Math.PI/2;
 
     this.add(this.silla1);
@@ -47,7 +47,7 @@ class MyScene extends THREE.Scene {
     //   Los planos de recorte cercano y lejano
     this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
     // También se indica dónde se coloca
-    this.camera.position.set (15, 20, 45);
+    this.camera.position.set (20, 20, 45);
     // Y hacia dónde mira
     var look = new THREE.Vector3 (0,13,0);
     this.camera.lookAt(look);
@@ -215,8 +215,8 @@ class MyScene extends THREE.Scene {
       if(x == 71 || x == 103) {
         var that = this;
 
-        var origen = {x: 15, y: 20, z: 45};
-        var destino = {x: 20, y: 15, z: 0};
+        var origen = {x: 20, y: 20, z: 45};
+        var destino = {x: 22, y: 15, z: 0};
 
         var animacionCamara = new TWEEN.Tween(origen)
           .to(destino, 2000)
@@ -232,15 +232,18 @@ class MyScene extends THREE.Scene {
       }
     }
 
-    if(x == 80 || x == 112)
-    {
-      this.cambioDeTurno();
-    }
+    if(this.iniciado) {
+      if(x == 80 || x == 112)
+      {
+        this.cambioDeTurno();
+      }
 
     if(x == 88 || x == 120)
-    {
-      this.vistaDesdeArriba();
+      {
+        this.vistaDesdeArriba();
+      }
     }
+    
     
     this.iniciado = true;
   }
@@ -260,15 +263,15 @@ class MyScene extends THREE.Scene {
 
     if(this.juego.jugador_actual == 0)
     {
-      origen = {x: 20, y: 15, z: 0};
+      origen = {x: 22, y: 15, z: 0};
       mitad = {x: 0, y: 15, z: 20};
-      destino = {x: -20, y: 15, z: 0};
+      destino = {x: -22, y: 15, z: 0};
     }
     else
     {
-      origen = {x: -20, y: 15, z: 0};
+      origen = {x: -22, y: 15, z: 0};
       mitad = {x: 0, y: 15, z: -20};
-      destino = {x: 20, y: 15, z: 0};
+      destino = {x: 22, y: 15, z: 0};
     }
 
 
@@ -313,13 +316,13 @@ class MyScene extends THREE.Scene {
     var destino;
 
     console.log(this.camera.position.x);
-    if(this.camera.position.x == 20)
+    if(this.camera.position.x == 22)
     {
       origen = {x: this.camera.position.x, y: 15, z: 0};
       destino = {x: 1, y: 40, z: 0};
     }
 
-    else if(this.camera.position.x == -20)
+    else if(this.camera.position.x == -22)
     {
       origen = {x: this.camera.position.x, y: 15, z: 0};
       destino = {x: -1, y: 40, z: 0};
@@ -332,11 +335,11 @@ class MyScene extends THREE.Scene {
         origen = {x: 0, y: 40, z: 0};
         if(this.juego.jugador_actual == 0)
         {
-          destino = {x: 20, y: 15, z: 0};
+          destino = {x: 22, y: 15, z: 0};
         }
         else
         {
-          destino = {x: -20, y: 15, z: 0};
+          destino = {x: -22, y: 15, z: 0};
         }
       }
     }
