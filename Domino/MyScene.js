@@ -191,11 +191,8 @@ class MyScene extends THREE.Scene {
       var estado = this.juego.consultarEstadoJuego()
 
       //El estado es false cuando no hay ganador por lo que sigue el juego
-      if(estado == false)
-      {
-        this.juego.cambioDeTurno();
+      if(estado == false)        
         setTimeout(() => {  this.cambioDeTurno(); }, 4000);
-      }    
       else
       {
         console.log("Hay un ganador");
@@ -303,6 +300,8 @@ class MyScene extends THREE.Scene {
 
       animacionCambioTurno_1.chain(animacionCambioTurno_2);
       animacionCambioTurno_1.start();
+
+      this.juego.cambioDeTurno();
 
   }
 
