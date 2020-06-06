@@ -44,40 +44,46 @@ class Domino extends THREE.Object3D
      */
     generarFichas()
     {
-        this.caja.push(new Ficha(0,0,this.geometriasMitades));
-        this.caja.push(new Ficha(0,1,this.geometriasMitades));
-        this.caja.push(new Ficha(0,2,this.geometriasMitades));
-        this.caja.push(new Ficha(0,3,this.geometriasMitades));
-        this.caja.push(new Ficha(0,4,this.geometriasMitades));
-        this.caja.push(new Ficha(0,5,this.geometriasMitades));
-        this.caja.push(new Ficha(0,6,this.geometriasMitades));
-
-        this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        this.caja.push(new Ficha(1,2,this.geometriasMitades));
-        this.caja.push(new Ficha(1,3,this.geometriasMitades));
-        this.caja.push(new Ficha(1,4,this.geometriasMitades));
-        this.caja.push(new Ficha(1,5,this.geometriasMitades));
-        this.caja.push(new Ficha(1,6,this.geometriasMitades));
-
         this.caja.push(new Ficha(2,2,this.geometriasMitades));
-        this.caja.push(new Ficha(2,3,this.geometriasMitades));
-        this.caja.push(new Ficha(2,4,this.geometriasMitades));
-        this.caja.push(new Ficha(2,5,this.geometriasMitades));
-        this.caja.push(new Ficha(2,6,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
 
-        this.caja.push(new Ficha(3,3,this.geometriasMitades));
-        this.caja.push(new Ficha(3,4,this.geometriasMitades));
-        this.caja.push(new Ficha(3,5,this.geometriasMitades));
-        this.caja.push(new Ficha(3,6,this.geometriasMitades));
 
-        this.caja.push(new Ficha(4,4,this.geometriasMitades));
-        this.caja.push(new Ficha(4,5,this.geometriasMitades));
-        this.caja.push(new Ficha(4,6,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,0,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,2,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,3,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,6,this.geometriasMitades));
 
-        this.caja.push(new Ficha(5,5,this.geometriasMitades));
-        this.caja.push(new Ficha(5,6,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,2,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,3,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,6,this.geometriasMitades));
 
-        this.caja.push(new Ficha(6,6,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,3,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,6,this.geometriasMitades));
+
+        // this.caja.push(new Ficha(3,3,this.geometriasMitades));
+        // this.caja.push(new Ficha(3,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(3,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(3,6,this.geometriasMitades));
+
+        // this.caja.push(new Ficha(4,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(4,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(4,6,this.geometriasMitades));
+
+        // this.caja.push(new Ficha(5,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(5,6,this.geometriasMitades));
+
+        // this.caja.push(new Ficha(6,6,this.geometriasMitades));
 
     }
 
@@ -90,7 +96,7 @@ class Domino extends THREE.Object3D
         for(var i = 0; i < this.jugadores.length; i++)
         {
             this.jugadores[i].clearFichas();
-            while(this.jugadores[i].fichas.length < 7)
+            while(this.jugadores[i].fichas.length < 2)
             {
                 this.caja = shuffle(this.caja);
                 this.jugadores[i].addFicha(this.caja[this.caja.length-1]);
@@ -452,6 +458,29 @@ class Domino extends THREE.Object3D
     {
         return this.jugadores[this.jugador_actual].fichas;
     }
+    /**
+     * @description Comprueba si el jugador que se pasa por parametro tiene opciones
+     * @param {Jugador} jugador 
+     * @returns True en caso afirmativo, false en caso negativo
+     */
+    calcularOpciones(jugador)
+    {
+        var J_opciones = false;
+        for(var i = 0; i < jugador.fichas.length && !J_opciones; i++)
+        {
+            var aux = false;
+            for(var j = 0; j < this.casillasDisponibles.length && !aux ; j++)
+            {
+                if(jugador.fichas[i].valorSup == this.casillasDisponibles[j].x || jugador.fichas[i].valorInf == this.casillasDisponibles[j].x  )
+                {
+                    aux = true;
+                    J_opciones = true;
+                }
+            }
+        }
+
+        return J_opciones;
+    }
 
     /**
      * @description Comprueba que el juego sigue o si en su defecto hay un ganador
@@ -460,47 +489,23 @@ class Domino extends THREE.Object3D
     consultarEstadoJuego()
     {
         if(this.jugadores[0].fichas.length == 0)
-            return 0;
+            return 1;
 
         if(this.jugadores[1].fichas.length == 0)
-            return 1;
+            return 2;
             
-        var J_1_opciones = false;
-        for(var i = 0; i < this.jugadores[0].fichas.length && !J_1_opciones; i++)
-        {
-            var aux = false;
-            for(var j = 0; j < this.casillasDisponibles.length && !aux; j++)
-            {
-                if(this.jugadores[0].fichas[i].valorSup == this.casillasDisponibles[j].valorSup || this.jugadores[0].fichas[i].valorSup == this.casillasDisponibles[j].valorInf || this.jugadores[0].fichas[i].valorInf == this.casillasDisponibles[j].valorSup || this.jugadores[0].fichas[i].valorInf == this.casillasDisponibles[j].valorInf )
-                {
-                    aux = true;
-                    J_1_opciones = true;
-                }
-            }
-        }
+        var J_1_opciones = this.calcularOpciones(this.jugadores[0]);
+        var J_2_opciones = this.calcularOpciones(this.jugadores[1]);
 
-
-        var J_2_opciones = false;
-        for(var i = 0; i < this.jugadores[1].fichas.length && !J_2_opciones; i++)
-        {
-            var aux = false;
-            for(var j = 0; j < this.casillasDisponibles.length && !aux; j++)
-            {
-                if(this.jugadores[1].fichas[i].valorSup == this.casillasDisponibles[j].valorSup || this.jugadores[1].fichas[i].valorSup == this.casillasDisponibles[j].valorInf || this.jugadores[1].fichas[i].valorInf == this.casillasDisponibles[j].valorSup || this.jugadores[1].fichas[i].valorInf == this.casillasDisponibles[j].valorInf )
-                {
-                    aux = true;
-                    J_2_opciones = true;
-                }
-            }
-        }
 
         if(!J_1_opciones && !J_2_opciones )
         {
             var puntosJ1 = this.jugadores[0].calcularPuntos();
             var puntosJ2 = this.jugadores[1].calcularPuntos();
 
+            //Gana el que tiene menos puntos
             if(puntosJ1 > puntosJ2)
-                return 0;
+                return 2;
             else if (puntosJ1 < puntosJ2)
                 return 1;
             else if (puntosJ1 == puntosJ2)

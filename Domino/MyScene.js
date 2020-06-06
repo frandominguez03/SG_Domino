@@ -189,7 +189,9 @@ class MyScene extends THREE.Scene {
       this.juego.jugarFicha(pickedObjects[0].object.userData);
       //Esperamos a que se termine la animación
       var estado = this.juego.consultarEstadoJuego()
-      if(estado)
+
+      //El estado es false cuando no hay ganador por lo que sigue el juego
+      if(estado == false)
         setTimeout(() => {  this.cambioDeTurno(); }, 4000);
       else
       {
