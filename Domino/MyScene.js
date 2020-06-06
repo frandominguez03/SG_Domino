@@ -192,7 +192,10 @@ class MyScene extends THREE.Scene {
 
       //El estado es false cuando no hay ganador por lo que sigue el juego
       if(estado == false)
+      {
+        this.juego.cambioDeTurno();
         setTimeout(() => {  this.cambioDeTurno(); }, 4000);
+      }    
       else
       {
         console.log("Hay un ganador");
@@ -301,8 +304,6 @@ class MyScene extends THREE.Scene {
       animacionCambioTurno_1.chain(animacionCambioTurno_2);
       animacionCambioTurno_1.start();
 
-      this.juego.cambioDeTurno();
-
   }
 
   /**
@@ -353,20 +354,7 @@ class MyScene extends THREE.Scene {
         var look = new THREE.Vector3 (0,13,0);
         that.camera.lookAt(look);
       });
-
-    //   var animacionCambioTurno_2 = new TWEEN.Tween(mitad)
-    //   .to(destino, 2000)
-    //   .easing(TWEEN.Easing.Quadratic.InOut)
-    //   .onUpdate(function() {
-    //     that.camera.position.set(mitad.x, mitad.y, mitad.z);
-    //     // Cambiamos a dónde mira
-    //     var look = new THREE.Vector3 (0,13,0);
-    //     that.camera.lookAt(look);
-    //   });
-
-
-
-    //   animacionCambioTurno_1.chain(animacionCambioTurno_2);
+      
     animacionVistaPajaro.start();
 
   }
