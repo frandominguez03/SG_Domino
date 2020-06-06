@@ -91,7 +91,7 @@ class Domino extends THREE.Object3D
         for(var i = 0; i < this.jugadores.length; i++)
         {
             this.jugadores[i].clearFichas();
-            while(this.jugadores[i].fichas.length < 2)
+            while(this.jugadores[i].fichas.length < 7)
             {
                 this.caja = shuffle(this.caja);
                 this.jugadores[i].addFicha(this.caja[this.caja.length-1]);
