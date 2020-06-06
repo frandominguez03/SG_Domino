@@ -368,8 +368,8 @@ class Domino extends THREE.Object3D
 
                     else if(this.jugador_actual == 1) {
                         if(resultado.x == ficha.valorSup) {
-                            this.origenBajada = {y: 12.0, rotation: Math.PI/2}
-                            this.destinoBajada = {y: 9.8, rotation: 3*Math.PI/2};
+                            this.origenBajada = {y: 12.0, rotation: -Math.PI/2}
+                            this.destinoBajada = {y: 9.8, rotation: -3*Math.PI/2};
     
                             var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                                 .easing(TWEEN.Easing.Quadratic.InOut)
@@ -456,6 +456,17 @@ class Domino extends THREE.Object3D
                     // ¿Qué parte de la ficha coincide?
                     if(this.jugador_actual == 0) {
                         if(resultado.x == ficha.valorSup) {
+                            this.origenBajada = {y: 12.0}
+                            this.destinoBajada = {y: 9.8};
+    
+                            var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                                .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onUpdate(function() {
+                                    ficha.position.y = that.origenBajada.y;
+                                });
+                        }
+    
+                        else if(resultado.x == ficha.valorInf) {
                             this.origenBajada = {y: 12.0, rotation: Math.PI/2}
                             this.destinoBajada = {y: 9.8, rotation: 3*Math.PI/2};
     
@@ -463,17 +474,6 @@ class Domino extends THREE.Object3D
                                 .easing(TWEEN.Easing.Quadratic.InOut)
                                 .onUpdate(function() {
                                     ficha.rotation.z = that.origenBajada.rotation;
-                                    ficha.position.y = that.origenBajada.y;
-                                });
-                        }
-    
-                        else if(resultado.x == ficha.valorInf) {
-                            this.origenBajada = {y: 12.0}
-                            this.destinoBajada = {y: 9.8};
-    
-                            var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
-                                .easing(TWEEN.Easing.Quadratic.InOut)
-                                .onUpdate(function() {
                                     ficha.position.y = that.origenBajada.y;
                                 });
                         }
@@ -571,6 +571,8 @@ class Domino extends THREE.Object3D
         var difFila = 10-fila;
         var difCol = 10-columna;
 
+        console.log(difFila);
+
 
         if(difCol < 0){
             difCol = (difCol*1.5)/2;
@@ -582,7 +584,21 @@ class Domino extends THREE.Object3D
             difCol = difCol*1.5;
         }
 
-        var resultado = {x: difFila*1.5, z: difCol};
+        if(difFila < 0) {
+            if(difFila < -2 && difFila >= -4) {
+                difFila = -(difFila+1);
+            }
+
+            else if(difFila < -4) {
+                difFila = -(difFila+1.5);
+            }
+
+            else {
+                difFila = -(difFila+0.5);
+            }
+        }
+
+        var resultado = {x: difFila, z: difCol};
 
         return resultado;
     }
