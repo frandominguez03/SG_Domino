@@ -261,24 +261,50 @@ class Domino extends THREE.Object3D
     {
         var that = this;
 
-        // Hacemos la primera animación. Igual para todas las fichas. Levantamos la ficha y se pone horizontal.
-        this.origen0 = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: Math.PI/2, rotationZ: 0.0};
+        // Hay que cambiar ligeramente la primera animación dependiendo del jugador actual
+        // Para el jugador 0
+        if(this.jugador_actual == 0) {
+            // Hacemos la primera animación. Igual para todas las fichas. Levantamos la ficha y se pone horizontal.
+            this.origen0 = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: Math.PI/2, rotationZ: 0.0};
 
-        // El primer destino es para levantar y girar la ficha
-        this.destino0 = {y: 12.0, rotationX: Math.PI/2, rotationY: 0.0, rotationZ: Math.PI/2};
+            // El primer destino es para levantar y girar la ficha
+            this.destino0 = {y: 12.0, rotationX: Math.PI/2, rotationY: 0.0, rotationZ: Math.PI/2};
 
-        var movimiento1 = new TWEEN.Tween(this.origen0).to(this.destino0, 1000)
-            .easing(TWEEN.Easing.Quadratic.InOut)
-            .onUpdate(function() {
-                ficha.rotation.y = that.origen0.rotationY;
-                ficha.rotation.x = -that.origen0.rotationX;
-                ficha.rotation.z = that.origen0.rotationZ;
-                ficha.position.y = that.origen0.y;
-            });
+            var movimiento1 = new TWEEN.Tween(this.origen0).to(this.destino0, 1000)
+                .easing(TWEEN.Easing.Quadratic.InOut)
+                .onUpdate(function() {
+                    ficha.rotation.y = that.origen0.rotationY;
+                    ficha.rotation.x = -that.origen0.rotationX;
+                    ficha.rotation.z = that.origen0.rotationZ;
+                    ficha.position.y = that.origen0.y;
+                });
+            
+            // Ahora comprobamos si tenemos que trasladar la ficha a la derecha o a la izquierda, antes de ponerla
+            // El origen es desde donde hemos levantado la ficha
+            this.origen1 = {x: ficha.position.x, y: 12.0, z: ficha.position.z, rotationZ: Math.PI/2};
+        }
         
-        // Ahora comprobamos si tenemos que trasladar la ficha a la derecha o a la izquierda, antes de ponerla
-        // El origen es desde donde hemos levantado la ficha
-        this.origen1 = {x: ficha.position.x, y: 12.0, z: ficha.position.z, rotationZ: Math.PI/2};
+        // Para el jugador 1
+        else if(this.jugador_actual == 1) {
+            // Hacemos la primera animación. Igual para todas las fichas. Levantamos la ficha y se pone horizontal.
+            this.origen0 = {x: ficha.position.x, y: ficha.position.y, z: ficha.position.z, rotationX: 0.0, rotationY: -Math.PI/2, rotationZ: 0.0};
+
+            // El primer destino es para levantar y girar la ficha
+            this.destino0 = {y: 12.0, rotationX: Math.PI/2, rotationY: 0.0, rotationZ: -Math.PI/2};
+
+            var movimiento1 = new TWEEN.Tween(this.origen0).to(this.destino0, 1000)
+                .easing(TWEEN.Easing.Quadratic.InOut)
+                .onUpdate(function() {
+                    ficha.rotation.y = that.origen0.rotationY;
+                    ficha.rotation.x = -that.origen0.rotationX;
+                    ficha.rotation.z = that.origen0.rotationZ;
+                    ficha.position.y = that.origen0.y;
+                });
+            
+            // Ahora comprobamos si tenemos que trasladar la ficha a la derecha o a la izquierda, antes de ponerla
+            // El origen es desde donde hemos levantado la ficha
+            this.origen1 = {x: ficha.position.x, y: 12.0, z: ficha.position.z, rotationZ: Math.PI/2};
+        }
         
         // Es la primera ficha. La ponemos en el centro directamente
         if(resultado.x == -1) {
