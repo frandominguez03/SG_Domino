@@ -197,7 +197,7 @@ class Domino extends THREE.Object3D
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorSup;
                         this.casillas[resultado.y+1][resultado.z] = f.valorInf;
-                        this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y+2,resultado.z));  
+                        this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y+2,resultado.z));  
                     }
                     else if (resultado.y >= 16) //Si la J >= 15 se cierra el rectángulo
                     {

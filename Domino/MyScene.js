@@ -209,17 +209,23 @@ class MyScene extends THREE.Scene {
     var that = this;
     if(pickedObjects.length > 0 && this.juego.puedeJugar == true)
     {
-      this.juego.jugarFicha(pickedObjects[0].object.userData);
-      //Esperamos a que se termine la animación
-      var estado = this.juego.consultarEstadoJuego()
-
-      //El estado es false cuando no hay ganador por lo que sigue el juego
-      if(estado == false)        
-        setTimeout(() => {  this.cambioDeTurno(); }, 4000);
-      else
+      //Variable auxiliar que comprueba el exito de la operacion
+      var aux = this.juego.jugarFicha(pickedObjects[0].object.userData);
+      if(aux)
       {
-        console.log("Hay un ganador");
-        console.log(estado);
+        //Esperamos a que se termine la animación
+        var estado = this.juego.consultarEstadoJuego()
+
+        //El estado es false cuando no hay ganador por lo que sigue el juego
+        if(estado == false)        
+          setTimeout(() => {  this.cambioDeTurno(); }, 4000);
+        else
+        {
+          console.log("Hay un ganador");
+          console.log(estado);
+        }
+      }else{
+        console.log("Algo ha salido mal");
       } 
         
 
