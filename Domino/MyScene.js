@@ -14,30 +14,54 @@ class MyScene extends THREE.Scene {
   
     this.createCamera ();
 
-    this.juego = new Domino();
-    this.add(this.juego);
+    // Cargamos los modelos de forma diferida, tras pedir los nombres de los jugadores
+    var diferidos = [];
+    diferidos.push(this.pedirNombres());
+    $.when.apply(this, diferidos).done( ()=> this.cargarModelos());
 
-    // Añadimos la habitación
-    this.room = new Habitacion();
-    this.add(this.room);
+  }
 
-    // Añadimos ambas sillas
-    this.silla1 = new Silla();
-    this.silla1.position.set(17, 0, 0);
-    this.silla1.rotation.y = -Math.PI/2;
-    this.silla2 = new Silla();
-    this.silla2.position.set(-17, 0, 0);
-    this.silla2.rotation.y = Math.PI/2;
+  /**
+   * @description Función para cargar los modelos en la escena
+   */
+  cargarModelos() {
+      this.juego = new Domino();
+      this.add(this.juego);
 
-    this.add(this.silla1);
-    this.add(this.silla2);
+      // Añadimos la habitación
+      this.room = new Habitacion();
+      this.add(this.room);
 
-    // Añadimos la mesa
-    this.mesa = new Mesa();
-    this.mesa.scale.set(3, 3, 3);
+      // Añadimos ambas sillas
+      this.silla1 = new Silla();
+      this.silla1.position.set(17, 0, 0);
+      this.silla1.rotation.y = -Math.PI/2;
+      this.silla2 = new Silla();
+      this.silla2.position.set(-17, 0, 0);
+      this.silla2.rotation.y = Math.PI/2;
 
-    this.add(this.mesa);
+      this.add(this.silla1);
+      this.add(this.silla2);
 
+      // Añadimos la mesa
+      this.mesa = new Mesa();
+      this.mesa.scale.set(3, 3, 3);
+
+      this.add(this.mesa);
+  }
+
+  /**
+   * @description Función que muestra dos alertas para pedir los nombres de los usuarios
+   */
+  pedirNombres() {
+      var diferido = $.Deferred();
+
+      this.jugador1 = prompt("Introduce el nombre del Jugador 1");
+      this.jugador2 = prompt("Introduce el nombre del Jugador 2");
+      
+      diferido.resolve();
+
+      return diferido.promise();
   }
   
   createCamera () {
