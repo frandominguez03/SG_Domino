@@ -198,7 +198,8 @@ class Domino extends THREE.Object3D
                         this.casillas[resultado.y][resultado.z] = f.valorSup;
                         this.casillas[resultado.y+1][resultado.z] = f.valorInf;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y+2,resultado.z));  
-                    }else if (resultado.y >= 16) //Si la J >= 15 se cierra el rectángulo
+                    }
+                    else if (resultado.y >= 16) //Si la J >= 15 se cierra el rectángulo
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorSup;
                         this.casillas[resultado.y][resultado.z+1] = f.valorInf;
@@ -223,7 +224,8 @@ class Domino extends THREE.Object3D
                         this.casillas[resultado.y][resultado.z] = f.valorInf;
                         this.casillas[resultado.y+1][resultado.z] = f.valorSup;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y+2,resultado.z)); 
-                    }else if (resultado.y >= 16) //Si la J >= 15 se cierra el rectángulo
+                    }
+                    else if (resultado.y >= 16) //Si la J >= 15 se cierra el rectángulo
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorInf;
                         this.casillas[resultado.y][resultado.z-1] = f.valorSup;
@@ -566,7 +568,7 @@ class Domino extends THREE.Object3D
                     movimiento1.start();
                 }
 
-                // EN horizontal sin más
+                // En horizontal sin más
                 else {
                     var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
                     this.destinoFinal = {x: tuplaDestino.x, z: tuplaDestino.z};
