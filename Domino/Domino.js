@@ -508,8 +508,8 @@ class Domino extends THREE.Object3D
 
                     else if(this.jugador_actual == 1) {
                         if(resultado.x == ficha.valorSup) {
-                            this.origenBajada = {y: 12.0, rotation: Math.PI/2}
-                            this.destinoBajada = {y: 9.8, rotation: 3*Math.PI/2};
+                            this.origenBajada = {y: 12.0, rotation: -Math.PI/2}
+                            this.destinoBajada = {y: 9.8, rotation: -3*Math.PI/2};
     
                             var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                                 .easing(TWEEN.Easing.Quadratic.InOut)
