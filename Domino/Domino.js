@@ -12,6 +12,7 @@ class Domino extends THREE.Object3D
         this.caja = [];
 
         this.estadoJuego = true; //true iniciado false terminado
+        this.puedeJugar = true;
 
         //Matriz que controlará la posición de las fichas
         this.TAM_MAX_CASILLAS = 20;
@@ -243,6 +244,8 @@ class Domino extends THREE.Object3D
             }
 
             this.jugadores[this.jugador_actual].jugarFicha(f);
+            //Con esta variable evitamos que un jugador tramposo pueda poner varias fichas
+            this.puedeJugar = false;
             this.situarFichaEnTablero(f, resultado);
             console.log(this.casillas);
             return true;
@@ -313,6 +316,10 @@ class Domino extends THREE.Object3D
 
             var movimientoTablero = new TWEEN.Tween(this.origen1).to(this.destinoFinal, 2000)
                 .easing(TWEEN.Easing.Quadratic.InOut)
+                .onComplete(function(){
+                    console.log("SE PONE VAR A TRUE");
+                    that.puedeJugar = true;
+                })
                 .onUpdate(function() {
                     ficha.position.x = that.origen1.x;
                     ficha.position.y = that.origen1.y;
@@ -348,6 +355,10 @@ class Domino extends THREE.Object3D
     
                             var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                                 .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onComplete(function(){
+                                    console.log("SE PONE VAR A TRUE");
+                                    that.puedeJugar = true;
+                                })
                                 .onUpdate(function() {
                                     ficha.position.y = that.origenBajada.y;
                                 });
@@ -373,6 +384,10 @@ class Domino extends THREE.Object3D
     
                             var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                                 .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onComplete(function(){
+                                    console.log("SE PONE VAR A TRUE");
+                                    that.puedeJugar = true;
+                                })
                                 .onUpdate(function() {
                                     ficha.rotation.z = that.origenBajada.rotation;
                                     ficha.position.y = that.origenBajada.y;
@@ -385,6 +400,10 @@ class Domino extends THREE.Object3D
     
                             var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                                 .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onComplete(function(){
+                                    console.log("SE PONE VAR A TRUE");
+                                    that.puedeJugar = true;
+                                })
                                 .onUpdate(function() {
                                     ficha.position.y = that.origenBajada.y;
                                 });
@@ -415,6 +434,10 @@ class Domino extends THREE.Object3D
 
                         var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                             .easing(TWEEN.Easing.Quadratic.InOut)
+                            .onComplete(function(){
+                                console.log("SE PONE VAR A TRUE");
+                                that.puedeJugar = true;
+                            })
                             .onUpdate(function() {
                                 ficha.rotation.z = that.destinoBajada.rotationZ;
                                 ficha.position.y = that.origenBajada.y;
@@ -427,6 +450,10 @@ class Domino extends THREE.Object3D
 
                         var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                             .easing(TWEEN.Easing.Quadratic.InOut)
+                            .onComplete(function(){
+                                that.puedeJugar = true;
+                                console.log("SE PONE VAR A TRUE");
+                            })
                             .onUpdate(function() {
                                 ficha.rotation.z = that.destinoBajada.rotationZ;
                                 ficha.position.y = that.origenBajada.y;
@@ -461,6 +488,10 @@ class Domino extends THREE.Object3D
     
                             var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                                 .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onComplete(function(){
+                                    that.puedeJugar = true;
+                                    console.log("SE PONE VAR A TRUE");
+                                })
                                 .onUpdate(function() {
                                     ficha.position.y = that.origenBajada.y;
                                 });
@@ -472,6 +503,10 @@ class Domino extends THREE.Object3D
     
                             var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                                 .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onComplete(function(){
+                                    that.puedeJugar = true;
+                                    console.log("SE PONE VAR A TRUE");
+                                })
                                 .onUpdate(function() {
                                     ficha.rotation.z = that.origenBajada.rotation;
                                     ficha.position.y = that.origenBajada.y;
@@ -486,6 +521,10 @@ class Domino extends THREE.Object3D
     
                             var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                                 .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onComplete(function(){
+                                    that.puedeJugar = true;
+                                    console.log("SE PONE VAR A TRUE");
+                                })
                                 .onUpdate(function() {
                                     ficha.rotation.z = that.origenBajada.rotation;
                                     ficha.position.y = that.origenBajada.y;
@@ -498,6 +537,10 @@ class Domino extends THREE.Object3D
     
                             var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                                 .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onComplete(function(){
+                                    that.puedeJugar = true;
+                                    console.log("SE PONE VAR A TRUE");
+                                })
                                 .onUpdate(function() {
                                     ficha.position.y = that.origenBajada.y;
                                 });
@@ -528,6 +571,9 @@ class Domino extends THREE.Object3D
 
                         var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                             .easing(TWEEN.Easing.Quadratic.InOut)
+                            .onComplete(function(){
+                                that.puedeJugar = true;
+                            })
                             .onUpdate(function() {
                                 ficha.rotation.z = that.destinoBajada.rotationZ;
                                 ficha.position.y = that.origenBajada.y;
@@ -540,6 +586,9 @@ class Domino extends THREE.Object3D
 
                         var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                             .easing(TWEEN.Easing.Quadratic.InOut)
+                            .onComplete(function(){
+                                that.puedeJugar = true;
+                            })
                             .onUpdate(function() {
                                 ficha.rotation.z = that.destinoBajada.rotationZ;
                                 ficha.position.y = that.origenBajada.y;

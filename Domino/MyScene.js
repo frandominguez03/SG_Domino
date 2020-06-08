@@ -183,7 +183,7 @@ class MyScene extends THREE.Scene {
 
     var pickedObjects = raycaster.intersectObjects(this.juego.getFichasSeleccionables(),true);
     var that = this;
-    if(pickedObjects.length > 0)
+    if(pickedObjects.length > 0 && this.juego.puedeJugar == true)
     {
       console.log(pickedObjects[0].object.userData);
       this.juego.jugarFicha(pickedObjects[0].object.userData);
