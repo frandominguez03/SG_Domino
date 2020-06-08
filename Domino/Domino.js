@@ -47,21 +47,21 @@ class Domino extends THREE.Object3D
     {
 
         //Lista de fichas para pruebas
-        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
         this.caja.push(new Ficha(1,2,this.geometriasMitades));
 
-        this.caja.push(new Ficha(2,2,this.geometriasMitades));
-        this.caja.push(new Ficha(2,2,this.geometriasMitades));
-        this.caja.push(new Ficha(2,2,this.geometriasMitades));
-        this.caja.push(new Ficha(2,2,this.geometriasMitades));
-        this.caja.push(new Ficha(2,2,this.geometriasMitades));
-        this.caja.push(new Ficha(2,2,this.geometriasMitades));
-        this.caja.push(new Ficha(2,2,this.geometriasMitades));
-        this.caja.push(new Ficha(2,2,this.geometriasMitades));
-        this.caja.push(new Ficha(2,2,this.geometriasMitades));
-        this.caja.push(new Ficha(2,2,this.geometriasMitades));
-        this.caja.push(new Ficha(2,2,this.geometriasMitades));
-        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
 
 
 
@@ -165,23 +165,23 @@ class Domino extends THREE.Object3D
                 if(resultado.z > 10 )
                 {
                     //Si la j es < 15 se avanza a la derecha únicamente
-                    if(resultado.z < 15)
+                    if(resultado.z < 15 && resultado.y == 10)
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorSup;
                         this.casillas[resultado.y][resultado.z+1] = f.valorInf;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y,resultado.z+2));
                     }
-                    else if (resultado.y < 17)//Si la j <= 15 se avanza hacia arriba en el tablero
+                    else if (resultado.y < 16)//Si la j <= 15 se avanza hacia arriba en el tablero
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorSup;
                         this.casillas[resultado.y+1][resultado.z] = f.valorInf;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y+2,resultado.z));
                     }
-                    else if (resultado.y >= 17) //Si la J >= 15 se cierra el rectángulo
+                    else if (resultado.y >= 16) //Si la J >= 15 se cierra el rectángulo
                     {
-                        this.casillas[resultado.y-1][resultado.z+1] = f.valorSup;
-                        this.casillas[resultado.y-1][resultado.z+2] = f.valorInf;
-                        this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y-1,resultado.z+3));
+                        this.casillas[resultado.y][resultado.z] = f.valorSup;
+                        this.casillas[resultado.y][resultado.z-1] = f.valorInf;
+                        this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y,resultado.z-2));
                     }
                     
                 }
@@ -212,7 +212,7 @@ class Domino extends THREE.Object3D
                 if(resultado.z > 10)
                 {
                     //Si la j es < 15 se avanza a la derecha únicamente
-                    if(resultado.z < 15)
+                    if(resultado.z < 15 && resultado.y == 10)
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorInf;
                         this.casillas[resultado.y][resultado.z+1] = f.valorSup;
