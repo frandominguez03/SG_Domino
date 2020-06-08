@@ -46,40 +46,62 @@ class Domino extends THREE.Object3D
     generarFichas()
     {
 
-        this.caja.push(new Ficha(0,0,this.geometriasMitades));
-        this.caja.push(new Ficha(0,1,this.geometriasMitades));
-        this.caja.push(new Ficha(0,2,this.geometriasMitades));
-        this.caja.push(new Ficha(0,3,this.geometriasMitades));
-        this.caja.push(new Ficha(0,4,this.geometriasMitades));
-        this.caja.push(new Ficha(0,5,this.geometriasMitades));
-        this.caja.push(new Ficha(0,6,this.geometriasMitades));
-
-        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        //Lista de fichas para pruebas
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
         this.caja.push(new Ficha(1,2,this.geometriasMitades));
-        this.caja.push(new Ficha(1,3,this.geometriasMitades));
-        this.caja.push(new Ficha(1,4,this.geometriasMitades));
-        this.caja.push(new Ficha(1,5,this.geometriasMitades));
-        this.caja.push(new Ficha(1,6,this.geometriasMitades));
 
         this.caja.push(new Ficha(2,2,this.geometriasMitades));
-        this.caja.push(new Ficha(2,3,this.geometriasMitades));
-        this.caja.push(new Ficha(2,4,this.geometriasMitades));
-        this.caja.push(new Ficha(2,5,this.geometriasMitades));
-        this.caja.push(new Ficha(2,6,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
 
-        this.caja.push(new Ficha(3,3,this.geometriasMitades));
-        this.caja.push(new Ficha(3,4,this.geometriasMitades));
-        this.caja.push(new Ficha(3,5,this.geometriasMitades));
-        this.caja.push(new Ficha(3,6,this.geometriasMitades));
 
-        this.caja.push(new Ficha(4,4,this.geometriasMitades));
-        this.caja.push(new Ficha(4,5,this.geometriasMitades));
-        this.caja.push(new Ficha(4,6,this.geometriasMitades));
 
-        this.caja.push(new Ficha(5,5,this.geometriasMitades));
-        this.caja.push(new Ficha(5,6,this.geometriasMitades));
 
-        this.caja.push(new Ficha(6,6,this.geometriasMitades));
+
+        //Todas las fichas del juego
+        // this.caja.push(new Ficha(0,0,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,2,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,3,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,6,this.geometriasMitades));
+
+        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,2,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,3,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,6,this.geometriasMitades));
+
+        // this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,3,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,6,this.geometriasMitades));
+
+        // this.caja.push(new Ficha(3,3,this.geometriasMitades));
+        // this.caja.push(new Ficha(3,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(3,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(3,6,this.geometriasMitades));
+
+        // this.caja.push(new Ficha(4,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(4,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(4,6,this.geometriasMitades));
+
+        // this.caja.push(new Ficha(5,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(5,6,this.geometriasMitades));
+
+        // this.caja.push(new Ficha(6,6,this.geometriasMitades));
 
     }
 
@@ -131,7 +153,6 @@ class Domino extends THREE.Object3D
     jugarFicha(f)
     {
         var resultado = this.comprobarFicha(f);
-
         if(resultado != false)
         {
             //Quitamos la casilla que se va a ocupar de la lista de casillas disponibles
@@ -141,7 +162,7 @@ class Domino extends THREE.Object3D
             if(resultado.x == f.valorSup && resultado.x != -1)
             {
                 //Si la coordenada J es > 10 se avanza hacia la derecha en la matriz
-                if(resultado.z > 10 && resultado.y < 15)
+                if(resultado.z > 10 )
                 {
                     //Si la j es < 15 se avanza a la derecha únicamente
                     if(resultado.z < 15)
@@ -150,34 +171,34 @@ class Domino extends THREE.Object3D
                         this.casillas[resultado.y][resultado.z+1] = f.valorInf;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y,resultado.z+2));
                     }
-                    else if (resultado.y < 15)//Si la j <= 15 se avanza hacia arriba en el tablero
+                    else if (resultado.y < 17)//Si la j <= 15 se avanza hacia arriba en el tablero
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorSup;
                         this.casillas[resultado.y+1][resultado.z] = f.valorInf;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y+2,resultado.z));
                     }
-                    else if (resultado.y >= 15) //Si la J >= 15 se cierra el rectángulo
+                    else if (resultado.y >= 17) //Si la J >= 15 se cierra el rectángulo
                     {
-                        this.casillas[resultado.y][resultado.z] = f.valorSup;
-                        this.casillas[resultado.y][resultado.z-1] = f.valorInf;
-                        this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y,resultado.z-2));
+                        this.casillas[resultado.y-1][resultado.z+1] = f.valorSup;
+                        this.casillas[resultado.y-1][resultado.z+2] = f.valorInf;
+                        this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y-1,resultado.z+3));
                     }
                     
                 }
                 else  //En caso contrario se avanza hacia la izquierda
                 {
-                    if(resultado.z > 5 && resultado.y < 15)
+                    if(resultado.z > 5 && resultado.y == 10)
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorSup;
                         this.casillas[resultado.y][resultado.z-1] = f.valorInf;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y,resultado.z-2));
                     }
-                    else if (resultado.y < 15)
+                    else if (resultado.y < 16)
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorSup;
                         this.casillas[resultado.y+1][resultado.z] = f.valorInf;
-                        this.casillasDisponibles.push(new THREE.Vector3(f.valorInf,resultado.y+2,resultado.z));
-                    }else if (resultado.y >= 15) //Si la J >= 15 se cierra el rectángulo
+                        this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y+2,resultado.z));  
+                    }else if (resultado.y >= 16) //Si la J >= 15 se cierra el rectángulo
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorSup;
                         this.casillas[resultado.y][resultado.z+1] = f.valorInf;
@@ -197,12 +218,12 @@ class Domino extends THREE.Object3D
                         this.casillas[resultado.y][resultado.z+1] = f.valorSup;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y,resultado.z+2));
                     }
-                    else if (resultado.y < 15)
+                    else if (resultado.y < 16)
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorInf;
                         this.casillas[resultado.y+1][resultado.z] = f.valorSup;
-                        this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y+2,resultado.z));
-                    }else if (resultado.y >= 15) //Si la J >= 15 se cierra el rectángulo
+                        this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y+2,resultado.z)); 
+                    }else if (resultado.y >= 16) //Si la J >= 15 se cierra el rectángulo
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorInf;
                         this.casillas[resultado.y][resultado.z-1] = f.valorSup;
@@ -212,21 +233,21 @@ class Domino extends THREE.Object3D
                 }
                 else //En caso contrario se avanza hacia la izquierda
                 {
-                    if(resultado.z > 5)
+                    if(resultado.z > 5 && resultado.y == 10)
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorInf;
                         this.casillas[resultado.y][resultado.z-1] = f.valorSup;
                         this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y,resultado.z-2));
                     }
 
-                    else if (resultado.y < 15)
+                    else if (resultado.y < 16)
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorInf;
                         this.casillas[resultado.y+1][resultado.z] = f.valorSup;
-                        this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y+2,resultado.z)); 
+                        this.casillasDisponibles.push(new THREE.Vector3(f.valorSup,resultado.y+2,resultado.z));
                     }
 
-                    else if (resultado.y >= 15) //Si la J >= 15 se cierra el rectángulo
+                    else if (resultado.y >= 16) //Si la J >= 15 se cierra el rectángulo
                     {
                         this.casillas[resultado.y][resultado.z] = f.valorInf;
                         this.casillas[resultado.y][resultado.z+1] = f.valorSup;
@@ -610,7 +631,7 @@ class Domino extends THREE.Object3D
         var difFila = 10-fila;
         var difCol = 10-columna;
 
-        console.log(difFila);
+
 
 
         if(difCol < 0){

@@ -209,7 +209,6 @@ class MyScene extends THREE.Scene {
     var that = this;
     if(pickedObjects.length > 0 && this.juego.puedeJugar == true)
     {
-      console.log(pickedObjects[0].object.userData);
       this.juego.jugarFicha(pickedObjects[0].object.userData);
       //Esperamos a que se termine la animación
       var estado = this.juego.consultarEstadoJuego()
@@ -339,7 +338,6 @@ class MyScene extends THREE.Scene {
     var origen;
     var destino;
 
-    console.log(this.camera.position.x);
     if(this.camera.position.x == 22)
     {
       origen = {x: this.camera.position.x, y: 15, z: 0};
