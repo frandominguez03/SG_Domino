@@ -175,8 +175,16 @@ class MyScene extends THREE.Scene {
           setTimeout(() => {  this.cambioDeTurno(); }, 4000);
         else
         {
-          console.log("Hay un ganador");
-          console.log(estado);
+          if(estado != 3)
+           document.getElementById("fin").innerHTML = "Tenemos un ganador!, Enhorabuena " + this.juego.jugadores[this.juego.jugador_actual].nombre;
+          else
+            document.getElementById("fin").innerHTML = "Fin del juego, tenemos un empate!";
+          
+            $("#fin").fadeIn(2000);
+            document.getElementById("fin").style.display = "flex"
+            document.getElementById("fin").style.margin = "25%";
+
+            $("#mensajeTurno").fadeOut(2000);
         }
       }
       else{
@@ -241,6 +249,7 @@ class MyScene extends THREE.Scene {
       this.add(this.juego)
 
       this.createCamera();
+      $("#fin").fadeOut(2000);
     }
 
     if(x == 88 || x == 120)
