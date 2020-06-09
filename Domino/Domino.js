@@ -4,7 +4,7 @@ class Domino extends THREE.Object3D
     /**
      * @description Constructor de la clase domino
      */
-    constructor()
+    constructor(jugador1, jugador2)
     {
         super();
         // Array con las mitades
@@ -27,8 +27,8 @@ class Domino extends THREE.Object3D
 
         this.generarFichas();
         this.jugadores = new Array();
-        this.jugadores.push(new Jugador("Miguel",1));
-        this.jugadores.push(new Jugador("Francisco",2));
+        this.jugadores.push(new Jugador(jugador1,1));
+        this.jugadores.push(new Jugador(jugador2,2));
 
         this.jugador_actual = 0;
 

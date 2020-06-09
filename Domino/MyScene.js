@@ -25,7 +25,7 @@ class MyScene extends THREE.Scene {
    * @description Función para cargar los modelos en la escena
    */
   cargarModelos() {
-      this.juego = new Domino();
+      this.juego = new Domino(this.jugador1, this.jugador2);
       this.add(this.juego);
 
       // Añadimos la habitación
@@ -263,7 +263,7 @@ class MyScene extends THREE.Scene {
         $("#mensajeInicio").fadeOut(800);
 
         // Mostramos además el mensaje de que comienza el primer jugador
-        document.getElementById("mensajeTurno").innerHTML = "Turno del jugador " + this.jugador1;
+        document.getElementById("mensajeTurno").innerHTML = "Turno del jugador " + this.juego.jugadores[this.juego.jugador_actual].nombre;
         $("#mensajeTurno").fadeIn(2000);
 
         this.iniciado = true;
@@ -324,6 +324,9 @@ class MyScene extends THREE.Scene {
       var animacionCambioTurno_2 = new TWEEN.Tween(mitad)
       .to(destino, 2000)
       .easing(TWEEN.Easing.Quadratic.InOut)
+      .onComplete(function() {
+        document.getElementById("mensajeTurno").innerHTML = "Turno del jugador " + that.juego.jugadores[that.juego.jugador_actual].nombre;
+      })
       .onUpdate(function() {
         that.camera.position.set(mitad.x, mitad.y, mitad.z);
         // Cambiamos a dónde mira
