@@ -65,8 +65,8 @@ class Domino extends THREE.Object3D
         // this.caja.push(new Ficha(1,1,this.geometriasMitades));
 
                 
-        this.caja.push(new Ficha(2,2,this.geometriasMitades));
-        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(4,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,4,this.geometriasMitades));
         this.caja.push(new Ficha(2,2,this.geometriasMitades));
         this.caja.push(new Ficha(2,2,this.geometriasMitades));
         this.caja.push(new Ficha(2,2,this.geometriasMitades));
@@ -673,7 +673,7 @@ class Domino extends THREE.Object3D
                 // En horizontal con verticales ya puestas
                 else if(resultado.y == 16) {
                     var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
-                    this.destinoFinal = {x: tuplaDestino.x+0.5, z: tuplaDestino.z-3.5};
+                    this.destinoFinal = {x: tuplaDestino.x, z: tuplaDestino.z-4};
 
                     var movimiento2 = new TWEEN.Tween(this.origen1).to(this.destinoFinal, 2000)
                         .easing(TWEEN.Easing.Quadratic.InOut)
@@ -685,8 +685,8 @@ class Domino extends THREE.Object3D
                     // ¿Qué parte de la ficha coincide?
                     if(this.jugador_actual == 0) {
                         if(resultado.x == ficha.valorSup) {
-                            this.origenBajada = {y: 12.0, rotationZ: 0.0}
-                            this.destinoBajada = {y: 9.8, rotationZ: -Math.PI/2};
+                            this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
+                            this.destinoBajada = {y: 9.8, rotationZ: Math.PI};
     
                             var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                                 .easing(TWEEN.Easing.Quadratic.InOut)
@@ -722,7 +722,7 @@ class Domino extends THREE.Object3D
                     else if(this.jugador_actual == 1) {
                         if(resultado.x == ficha.valorSup) {
                             this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
-                            this.destinoBajada = {y: 9.8, rotationZ: 0.0};
+                            this.destinoBajada = {y: 9.8, rotationZ: Math.PI};
     
                             var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                                 .easing(TWEEN.Easing.Quadratic.InOut)
@@ -737,7 +737,7 @@ class Domino extends THREE.Object3D
     
                         else if(resultado.x == ficha.valorInf) {
                             this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
-                            this.destinoBajada = {y: 9.8, rotationZ: Math.PI};
+                            this.destinoBajada = {y: 9.8, rotationZ: 0.0};
     
                             var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                                 .easing(TWEEN.Easing.Quadratic.InOut)
