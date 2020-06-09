@@ -452,8 +452,8 @@ class Domino extends THREE.Object3D
                     // ¿Qué parte de la ficha coincide?
                     if(this.jugador_actual == 0) {
                         if(resultado.x == ficha.valorSup) {
-                            this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
-                            this.destinoBajada = {y: 9.8, rotationZ: Math.PI};
+                            this.origenBajada = {y: 12.0, rotationZ: Math.PI}
+                            this.destinoBajada = {y: 9.8, rotationZ: Math.PI/2};
     
                             var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                                 .easing(TWEEN.Easing.Quadratic.InOut)
@@ -467,8 +467,8 @@ class Domino extends THREE.Object3D
                         }
     
                         else if(resultado.x == ficha.valorInf) {
-                            this.origenBajada = {y: 12.0, rotationZ: Math.PI}
-                            this.destinoBajada = {y: 9.8, rotationZ: Math.PI/2};
+                            this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
+                            this.destinoBajada = {y: 9.8, rotationZ: 0.0};
     
                             var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                                 .easing(TWEEN.Easing.Quadratic.InOut)
@@ -476,7 +476,7 @@ class Domino extends THREE.Object3D
                                     that.puedeJugar = true;  
                                 })
                                 .onUpdate(function() {
-                                    ficha.rotation.z = that.destinoBajada.rotationZ;
+                                    ficha.rotation.z = -that.destinoBajada.rotationZ;
                                     ficha.position.y = that.origenBajada.y;
                                 });
                         }
@@ -503,8 +503,8 @@ class Domino extends THREE.Object3D
                         }
     
                         else if(resultado.x == ficha.valorInf) {
-                            this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
-                            this.destinoBajada = {y: 9.8, rotationZ: Math.PI};
+                            this.origenBajada = {y: 12.0, rotationZ: 0.0}
+                            this.destinoBajada = {y: 9.8, rotationZ: -Math.PI/2};
     
                             var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                                 .easing(TWEEN.Easing.Quadratic.InOut)
@@ -654,7 +654,93 @@ class Domino extends THREE.Object3D
                     movimiento1.start();
                 }
 
-                // En horizontal sin más
+                // En horizontal con verticales ya puestas
+                else if(resultado.y == 16) {
+                    var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+                    this.destinoFinal = {x: tuplaDestino.x+0.5, z: tuplaDestino.z-3.5};
+
+                    var movimiento2 = new TWEEN.Tween(this.origen1).to(this.destinoFinal, 2000)
+                        .easing(TWEEN.Easing.Quadratic.InOut)
+                        .onUpdate(function() {
+                            ficha.position.x = that.origen1.x;
+                            ficha.position.z = that.origen1.z;
+                        });
+                    
+                    // ¿Qué parte de la ficha coincide?
+                    if(this.jugador_actual == 0) {
+                        if(resultado.x == ficha.valorSup) {
+                            this.origenBajada = {y: 12.0, rotationZ: 0.0}
+                            this.destinoBajada = {y: 9.8, rotationZ: -Math.PI/2};
+    
+                            var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                                .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onComplete(function(){
+                                    that.puedeJugar = true;
+                                })
+                                .onUpdate(function() {
+                                    ficha.rotation.z = that.destinoBajada.rotationZ;
+                                    ficha.position.y = that.origenBajada.y;
+                                });
+                        }
+    
+                        else if(resultado.x == ficha.valorInf) {
+                            this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
+                            this.destinoBajada = {y: 9.8, rotationZ: 0.0};
+    
+                            var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                                .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onComplete(function(){
+                                    that.puedeJugar = true;  
+                                })
+                                .onUpdate(function() {
+                                    ficha.rotation.z = that.destinoBajada.rotationZ;
+                                    ficha.position.y = that.origenBajada.y;
+                                });
+                        }
+    
+                        movimiento1.chain(movimiento2);
+                        movimiento2.chain(movimientoBajada);
+                        movimiento1.start();
+                    }
+                    
+                    else if(this.jugador_actual == 1) {
+                        if(resultado.x == ficha.valorSup) {
+                            this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
+                            this.destinoBajada = {y: 9.8, rotationZ: 0.0};
+    
+                            var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                                .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onComplete(function(){
+                                    that.puedeJugar = true;
+                                })
+                                .onUpdate(function() {
+                                    ficha.rotation.z = that.destinoBajada.rotationZ;
+                                    ficha.position.y = that.origenBajada.y;
+                                });
+                        }
+    
+                        else if(resultado.x == ficha.valorInf) {
+                            this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
+                            this.destinoBajada = {y: 9.8, rotationZ: Math.PI};
+    
+                            var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
+                                .easing(TWEEN.Easing.Quadratic.InOut)
+                                .onComplete(function(){
+                                    that.puedeJugar = true;  
+                                })
+                                .onUpdate(function() {
+                                    ficha.rotation.z = that.destinoBajada.rotationZ;
+                                    ficha.position.y = that.origenBajada.y;
+                                });
+                        }
+    
+                        movimiento1.chain(movimiento2);
+                        movimiento2.chain(movimientoBajada);
+                        movimiento1.start();
+                    }
+                }
+
+                // En horizontal sin más, pero sin haber puesto verticales anteriormente
                 else {
                     var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
                     this.destinoFinal = {x: tuplaDestino.x, z: tuplaDestino.z};
