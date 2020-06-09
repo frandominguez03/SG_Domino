@@ -468,8 +468,8 @@ class Domino extends THREE.Object3D
                     // ¿Qué parte de la ficha coincide?
                     if(this.jugador_actual == 0) {
                         if(resultado.x == ficha.valorSup) {
-                            this.origenBajada = {y: 12.0, rotationZ: Math.PI}
-                            this.destinoBajada = {y: 9.8, rotationZ: Math.PI/2};
+                            this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
+                            this.destinoBajada = {y: 9.8, rotationZ: 0.0};
     
                             var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                                 .easing(TWEEN.Easing.Quadratic.InOut)
@@ -484,7 +484,7 @@ class Domino extends THREE.Object3D
     
                         else if(resultado.x == ficha.valorInf) {
                             this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
-                            this.destinoBajada = {y: 9.8, rotationZ: 0.0};
+                            this.destinoBajada = {y: 9.8, rotationZ: Math.PI};
     
                             var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                                 .easing(TWEEN.Easing.Quadratic.InOut)
@@ -519,8 +519,8 @@ class Domino extends THREE.Object3D
                         }
     
                         else if(resultado.x == ficha.valorInf) {
-                            this.origenBajada = {y: 12.0, rotationZ: 0.0}
-                            this.destinoBajada = {y: 9.8, rotationZ: -Math.PI/2};
+                            this.origenBajada = {y: 12.0, rotationZ: Math.PI/2}
+                            this.destinoBajada = {y: 9.8, rotationZ: Math.PI};
     
                             var movimientoBajada = new TWEEN.Tween(this.origenBajada).to(this.destinoBajada, 1000)
                                 .easing(TWEEN.Easing.Quadratic.InOut)
