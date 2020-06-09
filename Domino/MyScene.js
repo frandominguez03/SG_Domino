@@ -248,6 +248,19 @@ class MyScene extends THREE.Scene {
         this.cambioDeTurno();
       }
 
+    if(x == 81 || x == 113)
+    {
+      this.iniciado = false;
+      
+      this.juego.eliminarFichas();
+      this.remove(this.children[6]);
+  
+      this.juego = new Domino(this.jugador1, this.jugador2);
+      this.add(this.juego)
+
+      this.createCamera();
+    }
+
     if(x == 88 || x == 120)
       {
         this.vistaDesdeArriba();

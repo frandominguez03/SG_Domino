@@ -47,61 +47,77 @@ class Domino extends THREE.Object3D
     {
 
         //Lista de fichas para pruebas
-        /*this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        
         this.caja.push(new Ficha(1,2,this.geometriasMitades));
 
-        this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        this.caja.push(new Ficha(1,1,this.geometriasMitades));*/
+        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
+
+                
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,2,this.geometriasMitades));
 
 
 
 
 
         //Todas las fichas del juego
-        this.caja.push(new Ficha(0,0,this.geometriasMitades));
-        this.caja.push(new Ficha(0,1,this.geometriasMitades));
-        this.caja.push(new Ficha(0,2,this.geometriasMitades));
-        this.caja.push(new Ficha(0,3,this.geometriasMitades));
-        this.caja.push(new Ficha(0,4,this.geometriasMitades));
-        this.caja.push(new Ficha(0,5,this.geometriasMitades));
-        this.caja.push(new Ficha(0,6,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,0,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,2,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,3,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,6,this.geometriasMitades));
 
-        this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        this.caja.push(new Ficha(1,2,this.geometriasMitades));
-        this.caja.push(new Ficha(1,3,this.geometriasMitades));
-        this.caja.push(new Ficha(1,4,this.geometriasMitades));
-        this.caja.push(new Ficha(1,5,this.geometriasMitades));
-        this.caja.push(new Ficha(1,6,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,2,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,3,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,6,this.geometriasMitades));
 
-        this.caja.push(new Ficha(2,2,this.geometriasMitades));
-        this.caja.push(new Ficha(2,3,this.geometriasMitades));
-        this.caja.push(new Ficha(2,4,this.geometriasMitades));
-        this.caja.push(new Ficha(2,5,this.geometriasMitades));
-        this.caja.push(new Ficha(2,6,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,3,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,6,this.geometriasMitades));
 
-        this.caja.push(new Ficha(3,3,this.geometriasMitades));
-        this.caja.push(new Ficha(3,4,this.geometriasMitades));
-        this.caja.push(new Ficha(3,5,this.geometriasMitades));
-        this.caja.push(new Ficha(3,6,this.geometriasMitades));
+        // this.caja.push(new Ficha(3,3,this.geometriasMitades));
+        // this.caja.push(new Ficha(3,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(3,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(3,6,this.geometriasMitades));
 
-        this.caja.push(new Ficha(4,4,this.geometriasMitades));
-        this.caja.push(new Ficha(4,5,this.geometriasMitades));
-        this.caja.push(new Ficha(4,6,this.geometriasMitades));
+        // this.caja.push(new Ficha(4,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(4,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(4,6,this.geometriasMitades));
 
-        this.caja.push(new Ficha(5,5,this.geometriasMitades));
-        this.caja.push(new Ficha(5,6,this.geometriasMitades));
+        // this.caja.push(new Ficha(5,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(5,6,this.geometriasMitades));
 
-        this.caja.push(new Ficha(6,6,this.geometriasMitades));
+        // this.caja.push(new Ficha(6,6,this.geometriasMitades));
 
     }
 
@@ -931,6 +947,13 @@ class Domino extends THREE.Object3D
         {
             return false;
         }
+    }
+    // /**
+    //  * @description Elimina las fichas de la escena
+    //  */
+    eliminarFichas()
+    {
+        this.remove(this);
     }
 }
 
