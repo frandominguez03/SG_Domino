@@ -65,5 +65,23 @@ class Habitacion extends THREE.Object3D {
         this.add(pared4);
         this.add(techo);
 
+        // Añadimos la mesa
+        this.mesa = new Mesa();
+        this.mesa.scale.set(3, 3, 3);
+
+        this.add(this.mesa);
+
+        // Añadimos ambas sillas
+        this.silla1 = new Silla();
+        this.silla1.position.set(17, 0, 0);
+        this.silla1.rotation.y = -Math.PI/2;
+        this.silla2 = new Silla();
+        this.silla2.position.set(-17, 0, 0);
+        this.silla2.rotation.y = Math.PI/2;
+
+        this.add(this.silla1);
+        this.add(this.silla2);
+
+
     }
 }
