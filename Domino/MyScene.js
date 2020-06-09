@@ -258,6 +258,15 @@ class MyScene extends THREE.Scene {
           });
         
         animacionCamara.start();
+
+        // Escondemos el mensaje de inicio
+        $("#mensajeInicio").fadeOut(800);
+
+        // Mostramos además el mensaje de que comienza el primer jugador
+        document.getElementById("mensajeTurno").innerHTML = "Turno del jugador " + this.jugador1;
+        $("#mensajeTurno").fadeIn(2000);
+
+        this.iniciado = true;
       }
     }
 
@@ -272,9 +281,6 @@ class MyScene extends THREE.Scene {
         this.vistaDesdeArriba();
       }
     }
-    
-    
-    this.iniciado = true;
   }
 
   /**
