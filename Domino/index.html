@@ -35,12 +35,21 @@
         }
         
         .mensaje{
-            position:absolute;
+            position: absolute;
             left: 100px;
             top: 20px;
             padding: 10px;
             background-color: #bbff99;
             border: 1px solid #44cc00;
+        }
+
+        #mensajeControles{
+            position: absolute;
+            right: 100px;
+            top: 20px;
+            padding: 10px;
+            background-color: #80bfff;
+            border: 1px solid #0080ff;
         }
     </style>
 </head>
@@ -52,6 +61,11 @@
 
 <div class="mensaje" id="mensajeTurno" style="display:none">
 
+</div>
+
+<div id="mensajeControles" style="display:none">
+    Tecla X: Mostrar tablero desde arriba<br>
+    Tecla P: Pasar el turno
 </div>
 
 <!-- Div which will hold the Output -->

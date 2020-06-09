@@ -7,8 +7,6 @@ class MyScene extends THREE.Scene {
     this.iniciado = false;
     
     this.renderer = this.createRenderer(myCanvas);
-    
-    this.gui = this.createGUI ();
   
     this.createLights ();
   
@@ -76,28 +74,6 @@ class MyScene extends THREE.Scene {
     var look = new THREE.Vector3 (0,13,0);
     this.camera.lookAt(look);
     this.add (this.camera);
-  }
-
-  
-  createGUI () {
-    // Se crea la interfaz gráfica de usuario
-    var gui = new dat.GUI();
-    
-    // La escena le va a añadir sus propios controles. 
-    // Se definen mediante una   new function()
-    // En este caso la intensidad de la luz y si se muestran o no los ejes
-    this.guiControls = new function() {
-      // En el contexto de una función   this   alude a la función
-      this.lightIntensity =1;
-    }
-
-    // Se crea una sección para los controles de esta clase
-    var folder = gui.addFolder ('Luz y Ejes');
-    
-    // Se le añade un control para la intensidad de la luz
-    folder.add (this.guiControls, 'lightIntensity', 0, 1, 0.1).name('Intensidad de la Luz : ');
-    
-    return gui;
   }
   
   createLights () {
@@ -181,10 +157,6 @@ class MyScene extends THREE.Scene {
     // Le decimos al renderizador "visualiza la escena que te indico usando la cámara que te estoy pasando"
     this.renderer.render (this, this.getCamera());
 
-    // Se actualizan los elementos de la escena para cada frame
-    // Se actualiza la intensidad de la luz con lo que haya indicado el usuario en la gui
-    this.luz1.intensity = this.guiControls.lightIntensity;
-
     // Actualizamos el juego
     this.juego.update();
 
@@ -206,7 +178,7 @@ class MyScene extends THREE.Scene {
     raycaster.setFromCamera(mouse,this.camera);
 
     var pickedObjects = raycaster.intersectObjects(this.juego.getFichasSeleccionables(),true);
-    var that = this;
+
     if(pickedObjects.length > 0 && this.juego.puedeJugar == true)
     {
       //Variable auxiliar que comprueba el exito de la operacion
@@ -224,11 +196,10 @@ class MyScene extends THREE.Scene {
           console.log("Hay un ganador");
           console.log(estado);
         }
-      }else{
+      }
+      else{
         console.log("Algo ha salido mal");
       } 
-        
-
     }
   }
 
@@ -263,8 +234,9 @@ class MyScene extends THREE.Scene {
         $("#mensajeInicio").fadeOut(800);
 
         // Mostramos además el mensaje de que comienza el primer jugador
-        document.getElementById("mensajeTurno").innerHTML = "Turno del jugador " + this.juego.jugadores[this.juego.jugador_actual].nombre;
+        document.getElementById("mensajeTurno").innerHTML = "Turno de " + this.juego.jugadores[this.juego.jugador_actual].nombre;
         $("#mensajeTurno").fadeIn(2000);
+        $("#mensajeControles").fadeIn(2000);
 
         this.iniciado = true;
       }
@@ -295,7 +267,6 @@ class MyScene extends THREE.Scene {
     var mitad;
     var destino;
 
-
     if(this.juego.jugador_actual == 0)
     {
       origen = {x: 22, y: 15, z: 0};
@@ -308,8 +279,6 @@ class MyScene extends THREE.Scene {
       mitad = {x: 0, y: 15, z: -20};
       destino = {x: 22, y: 15, z: 0};
     }
-
-
 
     var animacionCambioTurno_1 = new TWEEN.Tween(origen)
       .to(mitad, 2000)
@@ -325,7 +294,8 @@ class MyScene extends THREE.Scene {
       .to(destino, 2000)
       .easing(TWEEN.Easing.Quadratic.InOut)
       .onComplete(function() {
-        document.getElementById("mensajeTurno").innerHTML = "Turno del jugador " + that.juego.jugadores[that.juego.jugador_actual].nombre;
+        // Actualizamos el mensaje del turno actual
+        document.getElementById("mensajeTurno").innerHTML = "Turno de " + that.juego.jugadores[that.juego.jugador_actual].nombre;
       })
       .onUpdate(function() {
         that.camera.position.set(mitad.x, mitad.y, mitad.z);
@@ -333,8 +303,6 @@ class MyScene extends THREE.Scene {
         var look = new THREE.Vector3 (0,13,0);
         that.camera.lookAt(look);
       });
-
-
 
       animacionCambioTurno_1.chain(animacionCambioTurno_2);
       animacionCambioTurno_1.start();
@@ -394,8 +362,6 @@ class MyScene extends THREE.Scene {
     animacionVistaPajaro.start();
 
   }
-
-
 }
 
 
