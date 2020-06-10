@@ -173,7 +173,7 @@ class Domino extends THREE.Object3D
         {
             if(res[0].x != res[1].x)
             {
-                var r = confirm("¿Quieres jugar el "+res[0].x+"? Si pulsas cancelar jugarás el"+res[1].x);
+                var r = confirm("¿Quieres jugar el "+res[0].x+"? Si pulsas cancelar jugarás el "+res[1].x);
                 var resultado;
                 if(r)
                     resultado = res[0];
