@@ -48,21 +48,21 @@ class Domino extends THREE.Object3D
 
         //Lista de fichas para pruebas
         
-        // this.caja.push(new Ficha(2,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,2,this.geometriasMitades));
 
-        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        this.caja.push(new Ficha(1,1,this.geometriasMitades));
 
                 
         // this.caja.push(new Ficha(4,2,this.geometriasMitades));
@@ -84,40 +84,40 @@ class Domino extends THREE.Object3D
 
 
         //Todas las fichas del juego
-        this.caja.push(new Ficha(0,0,this.geometriasMitades));
-        this.caja.push(new Ficha(0,1,this.geometriasMitades));
-        this.caja.push(new Ficha(0,2,this.geometriasMitades));
-        this.caja.push(new Ficha(0,3,this.geometriasMitades));
-        this.caja.push(new Ficha(0,4,this.geometriasMitades));
-        this.caja.push(new Ficha(0,5,this.geometriasMitades));
-        this.caja.push(new Ficha(0,6,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,0,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,2,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,3,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(0,6,this.geometriasMitades));
 
-        this.caja.push(new Ficha(1,1,this.geometriasMitades));
-        this.caja.push(new Ficha(1,2,this.geometriasMitades));
-        this.caja.push(new Ficha(1,3,this.geometriasMitades));
-        this.caja.push(new Ficha(1,4,this.geometriasMitades));
-        this.caja.push(new Ficha(1,5,this.geometriasMitades));
-        this.caja.push(new Ficha(1,6,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,1,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,2,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,3,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(1,6,this.geometriasMitades));
 
-        this.caja.push(new Ficha(2,2,this.geometriasMitades));
-        this.caja.push(new Ficha(2,3,this.geometriasMitades));
-        this.caja.push(new Ficha(2,4,this.geometriasMitades));
-        this.caja.push(new Ficha(2,5,this.geometriasMitades));
-        this.caja.push(new Ficha(2,6,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,2,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,3,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(2,6,this.geometriasMitades));
 
-        this.caja.push(new Ficha(3,3,this.geometriasMitades));
-        this.caja.push(new Ficha(3,4,this.geometriasMitades));
-        this.caja.push(new Ficha(3,5,this.geometriasMitades));
-        this.caja.push(new Ficha(3,6,this.geometriasMitades));
+        // this.caja.push(new Ficha(3,3,this.geometriasMitades));
+        // this.caja.push(new Ficha(3,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(3,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(3,6,this.geometriasMitades));
 
-        this.caja.push(new Ficha(4,4,this.geometriasMitades));
-        this.caja.push(new Ficha(4,5,this.geometriasMitades));
-        this.caja.push(new Ficha(4,6,this.geometriasMitades));
+        // this.caja.push(new Ficha(4,4,this.geometriasMitades));
+        // this.caja.push(new Ficha(4,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(4,6,this.geometriasMitades));
 
-        this.caja.push(new Ficha(5,5,this.geometriasMitades));
-        this.caja.push(new Ficha(5,6,this.geometriasMitades));
+        // this.caja.push(new Ficha(5,5,this.geometriasMitades));
+        // this.caja.push(new Ficha(5,6,this.geometriasMitades));
 
-        this.caja.push(new Ficha(6,6,this.geometriasMitades));
+        // this.caja.push(new Ficha(6,6,this.geometriasMitades));
 
     }
 
@@ -411,7 +411,7 @@ class Domino extends THREE.Object3D
         
         // Es la primera ficha. La ponemos en el centro directamente
         if(resultado.x == -1) {
-            var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+            var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z, 0);
             this.destinoFinal = {x: tuplaDestino.x, y: 9.8, z: tuplaDestino.z, rotationZ: 0.0}
 
             var movimientoTablero = new TWEEN.Tween(this.origen1).to(this.destinoFinal, 2000)
@@ -436,7 +436,7 @@ class Domino extends THREE.Object3D
             if(resultado.z >= 10 && resultado.z <= 16) {
                 // Ponemos la ficha en vertical
                 if(resultado.z == 16 && resultado.y <= 15) {
-                    var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+                    var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z, 1);
                     this.destinoFinal = {x: tuplaDestino.x+0.5, z: tuplaDestino.z+0.5};
 
                     var movimiento2 = new TWEEN.Tween(this.origen1).to(this.destinoFinal, 2000)
@@ -516,7 +516,7 @@ class Domino extends THREE.Object3D
 
                 // En horizontal con verticales ya puestas
                 else if(resultado.y == 16) {
-                    var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+                    var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z, 1);
                     this.destinoFinal = {x: tuplaDestino.x, z: tuplaDestino.z+1};
 
                     var movimiento2 = new TWEEN.Tween(this.origen1).to(this.destinoFinal, 2000)
@@ -602,7 +602,7 @@ class Domino extends THREE.Object3D
                 
                 // En horizontal, pero sin haber puesto verticales anteriormente
                 else {
-                    var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+                    var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z, 1);
                     this.destinoFinal = {x: tuplaDestino.x, z: tuplaDestino.z};
 
                     var movimiento2 = new TWEEN.Tween(this.origen1).to(this.destinoFinal, 2000)
@@ -653,7 +653,7 @@ class Domino extends THREE.Object3D
             else if(resultado.z >= 5 && resultado.z <= 10) {
                 // Ponemos la ficha en vertical
                 if(resultado.z == 5 && resultado.y <= 15) {
-                    var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+                    var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z, 0);
                     this.destinoFinal = {x: tuplaDestino.x+0.5, z: tuplaDestino.z-3.5};
 
                     var movimiento2 = new TWEEN.Tween(this.origen1).to(this.destinoFinal, 2000)
@@ -733,7 +733,7 @@ class Domino extends THREE.Object3D
 
                 // En horizontal con verticales ya puestas
                 else if(resultado.y == 16) {
-                    var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+                    var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z, 0);
                     this.destinoFinal = {x: tuplaDestino.x, z: tuplaDestino.z};
 
                     var movimiento2 = new TWEEN.Tween(this.origen1).to(this.destinoFinal, 2000)
@@ -819,7 +819,7 @@ class Domino extends THREE.Object3D
 
                 // En horizontal sin más, pero sin haber puesto verticales anteriormente
                 else {
-                    var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z);
+                    var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z, 0);
                     this.destinoFinal = {x: tuplaDestino.x, z: tuplaDestino.z};
 
                     var movimiento2 = new TWEEN.Tween(this.origen1).to(this.destinoFinal, 2000)
@@ -873,10 +873,11 @@ class Domino extends THREE.Object3D
     /**
      * @description Devuelve dos valores con la posición en el espacio que le corresponde a una ficha según su posición en la matriz
      * @param {int} fila 
-     * @param {int} columna 
+     * @param {int} columna
+     * @param {boolean} lado 0 = izquierda, 1 = derecha
      * @returns Dos valores, enteros, con la posición en el espacio que corresponde
      */
-    obtenerPosicionEspacio(fila, columna) 
+    obtenerPosicionEspacio(fila, columna, lado) 
     {
         // Cada ficha está compuesta por 2 mitades. Cada mitad mide 0.75 de alto, por tanto, una ficha mide 1.5 unidades de alto.
         // El centro de nuestro tablero corresponde a la posición (10, 10) de la matriz
@@ -885,15 +886,34 @@ class Domino extends THREE.Object3D
         var difFila = 10-fila;
         var difCol = 10-columna;
 
+        console.log(difFila);
+        console.log(difCol);
 
         if(difCol < 0){
             if(difCol == -1 && difFila == -6) {
-                difCol = difCol-1;
+                if(lado == 1) {
+                    difCol = difCol-1;
+                }
+                
+            }
+
+            else if(difCol == -3 && difFila == -6) {
+                if(lado == 1) {
+                    difCol = difCol-0.5;
+                }
             }
 
             else {
                 difCol = (difCol*1.5)/2;
             }
+        }
+
+        else if(difCol == 2 && difFila == -6) {
+            difCol = difCol+0.5;
+        }
+
+        else if(difCol == 4 && difFila == -6) {
+            difCol = difCol;
         }
 
         else if(difCol == 5 && difFila == -6) {
