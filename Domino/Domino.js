@@ -886,9 +886,6 @@ class Domino extends THREE.Object3D
         var difFila = 10-fila;
         var difCol = 10-columna;
 
-        console.log(difFila);
-        console.log(difCol);
-
         if(difCol < 0){
             if(difCol == -1 && difFila == -6) {
                 if(lado == 1) {

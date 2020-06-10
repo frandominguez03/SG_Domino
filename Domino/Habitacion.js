@@ -27,7 +27,7 @@ class Habitacion extends THREE.Object3D {
         var geometryPared = new THREE.BoxGeometry(50, 0.2, 50);
 
         // Material de las paredes
-        var materialPared = new THREE.MeshPhongMaterial({color: 0xFFFFFF});
+        var materialPared = new THREE.MeshPhongMaterial({color: 0x105F9E});
 
         // Construimos los mesh de cada pared
         var pared1 = new THREE.Mesh(geometryPared, materialPared);

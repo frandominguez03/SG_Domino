@@ -74,6 +74,7 @@ class MyScene extends THREE.Scene {
     // En este caso se declara como   this.atributo   para que sea un atributo accesible desde otros métodos.
     this.luz1 = new THREE.SpotLight( 0xffffff, 0.5 );
     this.luz1.position.set( 0, 25, -50 );
+    this.luz1.lookAt(9.5, 10.3, 20);
     this.add (this.luz1);
 
     this.luz2 = new THREE.SpotLight( 0xffffff, 0.5 );
@@ -176,9 +177,9 @@ class MyScene extends THREE.Scene {
         else
         {
           if(estado != 3)
-           document.getElementById("fin").innerHTML = "Tenemos un ganador!, Enhorabuena " + this.juego.jugadores[this.juego.jugador_actual].nombre;
+           document.getElementById("fin").innerHTML = "¡Tenemos un ganador!<br> Enhorabuena " + this.juego.jugadores[this.juego.jugador_actual].nombre;
           else
-            document.getElementById("fin").innerHTML = "Fin del juego, tenemos un empate!";
+            document.getElementById("fin").innerHTML = "Fin del juego<br> ¡Tenemos un empate!";
           
             $("#fin").fadeIn(2000);
             document.getElementById("fin").style.display = "flex"
