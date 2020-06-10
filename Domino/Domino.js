@@ -168,7 +168,26 @@ class Domino extends THREE.Object3D
      */
     jugarFicha(f)
     {
-        var resultado = this.comprobarFicha(f);
+        var res = this.comprobarFicha(f);
+        if(res.length > 1)
+        {
+            if(res[0].x != res[1].x)
+            {
+                var r = confirm("¿Quieres jugar el "+res[0].x+"? Si pulsas cancelar jugarás el"+res[1].x);
+                var resultado;
+                if(r)
+                    resultado = res[0];
+                else
+                    resultado = res[1];
+            }else
+            {
+              //Si las dos casillas disponibles tienen el mismo número devolvemos el primero en la lista
+              resultado = res[0];  
+            }
+        }
+        else
+            var resultado = res;
+
         if(resultado != false)
         {
             //Quitamos la casilla que se va a ocupar de la lista de casillas disponibles
@@ -965,19 +984,24 @@ class Domino extends THREE.Object3D
     /**
      * @description Se comprueba si la ficha que se pretende jugar es válida (su valor superior o inferior coincide con el de una casilla válida)
      * @param {Ficha} f 
-     * @returns En caso de que sea una casilla válida devuelve la casilla (en caso de que haya varias devuelve la primera que encuentre) en caso de que no sea válida devuelve false
+     * @returns En caso de que sea una casilla válida devuelve la casilla (en caso de que haya varias devuelve todas) en caso de que no sea válida devuelve false
      */
     comprobarFicha(f)
     {
-
+        var arr = []
         for(var i = 0; i < this.casillasDisponibles.length; i++)
         {
             if(f.valorInf == this.casillasDisponibles[i].x || f.valorSup == this.casillasDisponibles[i].x || this.casillasDisponibles[i].x == -1)
-                return this.casillasDisponibles[i];
+                arr.push(this.casillasDisponibles[i]);
 
         }
 
-        return false;
+        if(arr.length == 0)
+            return false;
+        else if (arr.length == 1)
+            return arr[0];
+        else
+            return arr;
     }
 
     /**
