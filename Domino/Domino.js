@@ -48,7 +48,7 @@ class Domino extends THREE.Object3D
 
         //Lista de fichas para pruebas
         
-        this.caja.push(new Ficha(1,2,this.geometriasMitades));
+        this.caja.push(new Ficha(2,1,this.geometriasMitades));
 
         this.caja.push(new Ficha(1,1,this.geometriasMitades));
         this.caja.push(new Ficha(1,1,this.geometriasMitades));
@@ -433,7 +433,7 @@ class Domino extends THREE.Object3D
         // Si no es la primera ficha, gestionamos todas las casuísticas
         else {
             // ¿Nos movemos a la derecha?
-            if(resultado.z >= 10 && resultado.z <= 16) {
+            if(resultado.z >= 10 && resultado.z <= 18) {
                 // Ponemos la ficha en vertical
                 if(resultado.z == 16 && resultado.y <= 15) {
                     var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z, 1);
@@ -650,7 +650,7 @@ class Domino extends THREE.Object3D
             }
 
             // ¿Nos movemos a la izquierda?
-            else if(resultado.z >= 5 && resultado.z <= 10) {
+            else if(resultado.z >= 3 && resultado.z <= 10) {
                 // Ponemos la ficha en vertical
                 if(resultado.z == 5 && resultado.y <= 15) {
                     var tuplaDestino = this.obtenerPosicionEspacio(resultado.y, resultado.z, 0);
@@ -903,6 +903,14 @@ class Domino extends THREE.Object3D
                 }
             }
 
+            else if(difCol == -5 && difFila == -6) {
+                difCol = difCol;
+            }
+
+            else if(difCol == -7 && difFila == -6) {
+                difCol = difCol+0.5;
+            }
+
             else {
                 difCol = (difCol*1.5)/2;
             }
@@ -914,6 +922,10 @@ class Domino extends THREE.Object3D
 
         else if(difCol == 4 && difFila == -6) {
             difCol = difCol;
+        }
+
+        else if(difCol == 6 && difFila == -6) {
+            difCol = difCol-0.5;
         }
 
         else if(difCol == 5 && difFila == -6) {
